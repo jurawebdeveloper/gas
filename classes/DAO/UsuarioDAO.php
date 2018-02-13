@@ -15,6 +15,13 @@ clas UsuarioDAO extends Model{
 			'{$usuario->getSenha()}'";
 		$this->inserir($valores);
 	}
+	public function alteraUsuario(Usuario $usuario){
+		$valores = "
+			nome = '{$usuario->getNome()}',
+			perfil = '{$usuario->getPerfil()}',
+			senha = '{$usuario->getSenha()}'";
+		$this->alterar($usuario->getId(),$valores);
+	}
 }
 
 

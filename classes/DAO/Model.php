@@ -13,17 +13,11 @@
 		public function __construct(){
 
 	        try{
-
 		        $this->db = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->dbase, $this->user, $this->pass);
-
 		        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 	        } catch (PDOException $erro) {
-
 	            echo "Aconteceu o seguinte erro**** " . $erro->getMessage();
-
         	}
-
     	}
 
 		public function listar(){
@@ -32,9 +26,6 @@
 			$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
 			$sql->execute();
 			return $sql->fetchAll();
-		}
-
-		
 		}
 		
 		public function procurar($id){
