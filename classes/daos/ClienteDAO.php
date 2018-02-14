@@ -1,7 +1,7 @@
 
 <?php 
 require_once 'Model.php';
-clas ClienteDAO extends Model{
+class ClienteDAO extends Model{
 	function __construct(){
 		parent::__construct();
 		$this->class = 'Cliente';
@@ -36,6 +36,7 @@ clas ClienteDAO extends Model{
 			'{$cliente->getCPF()}',
 			'{$cliente->getAniversario()}'";
 		$this->inserir($valores);
+		//print_r($valores); exit;
 	}
 	public function alteraCliente(Cliente $cliente){
 		$valores = "

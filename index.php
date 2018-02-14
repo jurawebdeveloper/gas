@@ -1,6 +1,5 @@
-<?php
 
-?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -26,55 +25,56 @@
           <h3>Em branco</h3>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12">
+          
           <h3>Cliente</h3> 
-          <form action="/action_page.php">
+          <form action="mantemCliente.php" method = "post">
             <div class="form-group">
               <label for="telefone1">Telefone 1:</label>
-              <input type="text" class="form-control" id="telefone1">
+              <input type="text" class="form-control" id="telefone1" name="telefone1">
             </div>
             <div class="form-group">
               <label for="telefone2">Telefone 2:</label>
-              <input type="text" class="form-control" id="telefone2">
+              <input type="text" class="form-control" id="telefone2" name="telefone2">
             </div>
             <div class="form-group">
               <label for="telefone3">Telefone 3:</label>
-              <input type="text" class="form-control" id="telefone3">
+              <input type="text" class="form-control" id="telefone3" name="telefone3">
             </div>
             <div class="form-group">
               <label for="telefone4">Telefone 4:</label>
-              <input type="text" class="form-control" id="telefone4">
+              <input type="text" class="form-control" id="telefone4" name="telefone4">
             </div>
             <div class="form-group">
               <label for="telefone5">Telefone 5:</label>
-              <input type="text" class="form-control" id="telefone5">
+              <input type="text" class="form-control" id="telefone5" name="telefone5">
             </div>
             <div class="form-group">
               <label for="rua">Rua:</label>
-              <input type="text" class="form-control" id="rua">
+              <input type="text" class="form-control" id="rua" name="rua">
             </div>
             <div class="form-group">
               <label for="numero">Número:</label>
-              <input type="text" class="form-control" id="numero">
+              <input type="text" class="form-control" id="numero" name="numero">
             </div>
             <div class="form-group">
               <label for="bairro">Bairro:</label>
-              <input type="text" class="form-control" id="bairro">
+              <input type="text" class="form-control" id="bairro" name="bairro">
             </div>
             <div class="form-group">
               <label for="cep">CEP:</label>
-              <input type="text" class="form-control" id="cep">
+              <input type="text" class="form-control" id="cep" name="cep">
             </div>
             <div class="form-group">
               <label for="nome">Nome do Cliente:</label>
-              <input type="text" class="form-control" id="nome">
+              <input type="text" class="form-control" id="nome" name="nome">
             </div>
             <div class="form-group">
               <label for="cpf">CPF:</label>
-              <input type="text" class="form-control" id="cpf">
+              <input type="text" class="form-control" id="cpf" name="cpf">
             </div>
             <div class="form-group">
               <label for="aniversario">Aniversário:</label>
-              <input type="text" class="form-control" id="aniversario">
+              <input type="text" class="form-control" id="aniversario" name="aniversario">
             </div>
             
             <button type="submit" class="btn btn-default">Submit</button>
