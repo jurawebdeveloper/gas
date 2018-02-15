@@ -1,9 +1,9 @@
 <?php
     date_default_timezone_set("America/Sao_Paulo");
       
-
-          include 'classes/models/Cliente.php' ;
-          include 'classes/daos/ClienteDAO.php' ;
+    require_once('autoload.php');
+          /*include 'classes/models/Cliente.php' ;
+          include 'classes/daos/ClienteDAO.php' ;*/
 ?>
 
 <!--/*****************************************************************************/-->
