@@ -26,6 +26,12 @@ class CepDAO extends Model{
 			uf = '{$cep->getUf()}'";
 		$this->alterar($cep->getCep(),$valores);
 	}
+
+	public function procuraRua($digitaRua)
+	{
+		$termo = "logradouro like '%{$digitaRua}%'";
+		return $this->procurarTermo($termo);
+	}
 }
 
 

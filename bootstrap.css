@@ -9039,7 +9039,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .bg-dark {
-  background-color: #056743 !important;
+  background-color: #02B875 !important;
 }
 
 .bg-light {
@@ -9134,7 +9134,7 @@ table-success, table-info, table-warning, table-danger,
 
 .table-hover .table-warning:hover, .table-hover .table-warning:hover > th, .table-hover .table-warning:hover > td {
   background-color: #eea236;
-}z
+}
 
 .nav,
 .breadcrumb,

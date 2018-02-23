@@ -1,9 +1,7 @@
 
-
-<?php
-    date_default_timezone_set("America/Sao_Paulo");
-    require_once('layout/header.php');
-?>
+    <?php 
+      require_once 'layout/header.php';
+    ?>
 
 
   
@@ -19,19 +17,22 @@
               <h3 id="forms">Cliente</h3>
             </div>
             <div class="bs-component">
-              <form action="mantemCliente.php" method = "post">
+              <form>
                 <fieldset>
-                  <div class="form-group">
-                    <label class="col-form-label" for="numero">Telefone</label>
-                    <input type="text" class="form-control " id="telefone" name = "telefone"  placeholder="Aguardando nova chamada...">
-                  </div>
                   <div class="form-group">
                     <label class="col-form-label" for="rua">Rua</label>
                     <input type="text" class="form-control " id="rua" name = "rua"  placeholder="Digite o nome da rua...">
-                    <input type="hidden" class="form-control " id="logradouro" name = "logradouro" >
-                    <input type="hidden" class="form-control " id="cep" name = "cep"  >
                   </div>
-                 <div class="form-group">
+                  <div hidden class="form-group">
+                    <input type="text" class="form-control " id="logradouro" name = "logradouro" >
+                  </div>
+                  <div hidden class="form-group">
+                    <label class="col-form-label" for="rua">Cep</label>
+                    <input type="text" class="form-control " id="cep" name = "cep"  >
+                    <label class="col-form-label" for="numero">Número</label>
+                    <input type="text" class="form-control " id="numero" name = "numero"  placeholder="Digite o numero da casa...">
+                  </div>
+                  <div class="form-group">
                     <label class="col-form-label" for="numero">Número</label>
                     <input type="text" class="form-control " id="numero" name = "numero"  placeholder="Digite o numero da casa...">
                   </div>
@@ -116,29 +117,64 @@
         </div>
       </div>
 
-<?php
-    
-    require_once('layout/footer.php');
-?>
+
+
+
+
+
+      <!-- Indicators
+      ================================================== -->
+        <div class="bs-docs-section">
+
+          <div class="bs-component">
+            <span class="badge badge-pill badge-primary">Primary</span>
+            <span class="badge badge-pill badge-secondary">Secondary</span>
+            <span class="badge badge-pill badge-success">Success</span>
+            <span class="badge badge-pill badge-danger">Danger</span>
+            <span class="badge badge-pill badge-warning">Warning</span>
+            <span class="badge badge-pill badge-info">Info</span>
+            <span class="badge badge-pill badge-light">Light</span>
+            <span class="badge badge-pill badge-dark">Dark</span>
+          </div>
+        </div>
+      
+
+      <footer id="footer">
+        <div class="row">
+          <div class="col-lg-12">
+
+            <p>Based on <a href="https://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fontawesome.io/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="https://fonts.google.com/" rel="nofollow">Google</a>.</p>
+
+          </div>
+        </div>
+
+      </footer>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
+  </body>
+</html>
 
 <script>
-      $( function() {
-        function log( message, message_l ) {
-          $('#cep').val(message);
-          $('#logradouro').val(message_l);
-          $('#numero').focus();
+    $( function() {
+      function log( message, message_l ) {
+        $('#cep').val(message);
+        $('#logradouro').val(message_l);
+        $('#numero').focus();
+      }
+   
+      $( "#rua" ).autocomplete({
+        source: "procuraCepRua.php",
+        minLength: 2,
+        select: function( event, ui ) {
+          let str = ui.item.value;
+          let separa = str.split(" - CEP: ");
+          let separa_l = separa[0].split(" - ");
+          console.log(separa_l);
+          log( separa[1], separa_l[0] );
         }
-     
-        $( "#rua" ).autocomplete({
-          source: "procuraCepRua.php",
-          minLength: 2,
-          select: function( event, ui ) {
-            let str = ui.item.value;
-            let separa = str.split(" - CEP: ");
-            let separa_l = separa[0].split(" - ");
-            console.log(separa_l);
-            log( separa[1], separa_l[0] );
-          }
-        });
+      });
       } );
     </script>

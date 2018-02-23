@@ -4,7 +4,7 @@
 		private $id;
 		private $ddd;
 		private $numero;
-		private $cliente;
+		private $cliente_id;
 		
  
 
@@ -45,13 +45,13 @@
     }
 
     /**
-     * @param mixed $cliente
+     * @param mixed $cliente_id
      *
      * @return self
      */
-    public function setCliente($cliente)
+    public function setClienteId($cliente_id)
     {
-        $this->cliente = $cliente;
+        $this->cliente_id = $cliente_id;
 
         
     }
@@ -83,9 +83,9 @@
     /**
      * @return mixed
      */
-    public function getCliente()
+    public function getClienteId()
     {
-        return $this->cliente;
+        return $this->cliente_id;
     }
 }
 

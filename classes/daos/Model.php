@@ -35,6 +35,21 @@
 			$sql->execute();
 			return $sql->fetch();
 		}
+
+		public function procuraCep($cep){
+			$sql = $this->db->prepare("SELECT * FROM {$this->table} WHERE cep = {$cep}");
+			//print_r($sql); exit;
+			$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
+			$sql->execute();
+			return $sql->fetch();
+		}
+
+		public function procurarTermo($termo){
+			$sql = $this->db->prepare("SELECT * FROM {$this->table} WHERE {$termo}");
+			$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
+			$sql->execute();
+			return $sql->fetchAll();
+		}
 		public function deletar($id){
 			$sql = $this->db->prepare("DELETE FROM {$this->table} WHERE id = {$id}");
 			//print_r($sql); exit;

@@ -10,9 +10,10 @@ class TelefoneDAO extends Model{
 	
 	public function insereTelefone(Telefone $telefone){
 		$valores = "
+			null,
 			'{$telefone->getDdd()}',
 			'{$telefone->getNumero()}',
-			'{$telefone->getCliente()}'";
+			'{$telefone->getClienteId()}'";
 		$this->inserir($valores);
 		//print_r($valores); exit;
 	}
@@ -20,7 +21,7 @@ class TelefoneDAO extends Model{
 		$valores = "
 			ddd = '{$telefone->getDdd()}',
 			numero = '{$telefone->getNumero()}',
-			cliente_id = '{$telefone->getCliente()->getId()}'";
+			cliente_id = '{$telefone->getClienteId()}'";
 		$this->alterar($telefone->getId(),$valores);
 	}
 }

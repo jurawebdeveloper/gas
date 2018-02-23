@@ -12,12 +12,14 @@ class ClienteDAO extends Model{
 		$valores = "
 			null,
 			'{$cliente->getNumero()}',
-			'{$cliente->getCep()}',
 			'{$cliente->getNome()}',
 			'{$cliente->getCPF()}',
-			'{$cliente->getAniversario()}'";
+			'{$cliente->getAniversario()}',
+			 {$cliente->getCep()}";
 		$this->inserir($valores);
 		//print_r($valores); exit;
+		return $this->db->lastInsertId(); //retorna o id que acabou de ser gerado no insereCliente
+		//print_r($this->db->lastInsertId()); exit;
 	}
 	public function alteraCliente(Cliente $cliente){
 		$valores = "
