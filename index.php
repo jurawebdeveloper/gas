@@ -1,8 +1,11 @@
 
 
 <?php
-    date_default_timezone_set("America/Sao_Paulo");
+date_default_timezone_set("America/Sao_Paulo");
     require_once('layout/header.php');
+
+    $itemEstoqueDAO = new ItemEstoqueDAO();
+    $itens = $itemEstoqueDAO->listar();
 ?>
 
 
@@ -23,7 +26,7 @@
                 <fieldset>
                   <div class="form-group">
                     <label class="col-form-label" for="numero">Telefone</label>
-                    <input type="text" class="form-control " id="telefone" name = "telefone"  placeholder="Aguardando nova chamada...">
+                    <input type="text" class="form-control " id="telefone" name = "telefone"  placeholder="Digite o telefone...">
                   </div>
                   <div class="form-group">
                     <label class="col-form-label" for="rua">Rua</label>
@@ -62,10 +65,15 @@
             <div class="page-header">
               <h3 id="forms">Venda</h3>
             </div>
-            <form class="bs-component">
+            <form class="bs-component" action="mantemVenda.php" method = "post">
               <div class="form-group">
                 <label class="col-form-label" for="rua">Produto</label>
-                <input type="text" class="form-control " id="produto" name = "rua"  placeholder="Selecione...">
+                <select class="form-control" name="id_turma" required>
+                  <option value="">-- Escolha o produto --</option>
+                    <?php foreach ($itens as $itemEstoque) { 
+                      $produtoDAO = new ProdutoDAO();
+                      $item = $produtoDAO->procurar($itemEstoque->produto_id);
+                    ?>
               </div>
               <div class="form-group">
                 <label class="col-form-label" for="rua">Quantidade</label>
@@ -82,39 +90,6 @@
       </div>
 
 
-
-    <!-- Tables
-      ================================================== -->
-      <div class="bs-docs-section">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="page-header">
-              <h1 id="tables">Tables</h1>
-            </div>
-
-            <div class="bs-component">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">Type</th>
-                    <th scope="col">Column heading</th>
-                    <th scope="col">Column heading</th>
-                    <th scope="col">Column heading</th>
-                  </tr>
-                </thead>
-                <tbody>
-                 <tr class="table-info">
-                    <th scope="row">Info</th>
-                    <td>Column content</td>
-                    <td>Column content</td>
-                    <td>Column content</td>
-                  </tr>
-               </tbody>
-              </table> 
-            </div><!-- /example -->
-          </div>
-        </div>
-      </div>
 
 <?php
     

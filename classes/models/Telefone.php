@@ -1,6 +1,6 @@
 
-<?php 
-	class Telefone{
+<?php
+class Telefone{
 		private $id;
 		private $ddd;
 		private $numero;

@@ -1,6 +1,5 @@
-
-<?php 
-	class Cep{
+<?php
+class Cep{
 		private $cep;
 		private $logradouro;
 		private $bairro;

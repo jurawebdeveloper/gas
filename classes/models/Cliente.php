@@ -1,6 +1,6 @@
 
-<?php 
-	class Cliente{
+<?php
+class Cliente{
 		private $id;
 		private $numero;
 		private $cep;

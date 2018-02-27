@@ -1,5 +1,5 @@
 
-<?php 
+<?php
 require_once 'Model.php';
 class ClienteDAO extends Model{
 	function __construct(){

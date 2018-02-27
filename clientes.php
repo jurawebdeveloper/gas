@@ -1,7 +1,7 @@
 
 
 <?php
-    date_default_timezone_set("America/Sao_Paulo");
+date_default_timezone_set("America/Sao_Paulo");
     require_once('layout/header.php');
 ?>
 
@@ -16,10 +16,8 @@
   $query = $clienteDAO->listar();
 
 ?>
-      <div class="bs-docs-section">
-        
-        <div class="row">
-          <div class="col-lg-12">
+      
+          <div class="col-lg-12 col-sm-12">
             <div class="page-header">
               <h1 id="tables">Clientes</h1>
             </div>
@@ -55,11 +53,11 @@
                     <td> <?php echo $cep->getBairro(); ?> </td>
                     <td> <?php echo $cliente->getAniversario(); ?> </td>
                     <td>
-                      <a href="#" class="btn btn-light" data-toggle="tooltip" data-placement="top"  title="Visualizar">Tel</a>
+                        <a href="#" class="btn btn-light" data-toggle="tooltip" data-placement="top"  title="Visualizar">Tel</a>
 
                         <a href="#" class="btn btn-warning" data-toggle="tooltip" data-placement="top"   title="Editar">Edita</a>
 
-                        <a href="#" class="btn btn-danger"  data-toggle="tooltip" data-placement="top" title="Deletar">Exclui</a>
+                        <!--<a href="#" class="btn btn-danger"  data-toggle="tooltip" data-placement="top" title="Deletar">Exclui</a> -->
                     </td>
                   </tr>
                   <?php } ?>
@@ -67,8 +65,7 @@
               </table> 
             </div><!-- /example -->
           </div>
-        </div>
-      </div>
+       
 
 <?php
     

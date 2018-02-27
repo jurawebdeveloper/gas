@@ -1,5 +1,5 @@
 
-<?php 
+<?php
 require_once 'Model.php';
 clas UsuarioDAO extends Model{
 	function __construct(){

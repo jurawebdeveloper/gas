@@ -1,5 +1,5 @@
 <?php
-    date_default_timezone_set("America/Sao_Paulo");
+date_default_timezone_set("America/Sao_Paulo");
     require_once('autoload.php');
 
 ?>
@@ -32,6 +32,6 @@
 
   $telefoneDAO->insereTelefone($telefone);
   
-  header("Location:index.php?msg=$msg&class=$class");
+  header("Location:clientes.php?msg=$msg&class=$class");
 
 ?>
