@@ -7,6 +7,14 @@ class TelefoneDAO extends Model{
 		$this->class = 'Telefone';
 		$this->table = 'telefone';
 	}
+
+	public function procuraTel($numero){
+			$sql = $this->db->prepare("SELECT * FROM {$this->table} WHERE numero = {$numero}");
+			$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
+			//print_r($sql); exit;
+			$sql->execute();
+			return $sql->fetch();
+		}
 	
 	public function insereTelefone(Telefone $telefone){
 		$valores = "
@@ -17,7 +25,7 @@ class TelefoneDAO extends Model{
 		$this->inserir($valores);
 		//print_r($valores); exit;
 	}
-	public function altera(Telefone $telefone){
+	public function alteraTelefone(Telefone $telefone){
 		$valores = "
 			ddd = '{$telefone->getDdd()}',
 			numero = '{$telefone->getNumero()}',

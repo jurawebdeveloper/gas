@@ -1,7 +1,6 @@
-
 <?php
 require_once 'Model.php';
-clas ItemEstoqueDAO extends Model{
+class ItemEstoqueDAO extends Model{
 	function __construct(){
 		parent::__construct();
 		$this->class = 'ItemEstoque';

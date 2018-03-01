@@ -1,4 +1,3 @@
-
 <?php
 require_once 'Model.php';
 class ClienteDAO extends Model{
@@ -24,10 +23,10 @@ class ClienteDAO extends Model{
 	public function alteraCliente(Cliente $cliente){
 		$valores = "
 			numero = '{$cliente->getNumero()}',
-			cep = '{$cliente->getCep()->getCep()}',
 			nome = '{$cliente->getNome()}',
 			cpf = '{$cliente->getCPF()}',
-			aniversario = '{$cliente->getAniversario()}'";
+			aniversario = '{$cliente->getAniversario()}',
+			cep = '{$cliente->getCep()}'";
 		$this->alterar($cliente->getId(),$valores);
 	}
 }

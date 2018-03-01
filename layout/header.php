@@ -44,7 +44,7 @@ date_default_timezone_set("America/Sao_Paulo");
                       <a class="nav-link" href="index.php"><span class=" btn btn-secondary">PRINCIPAL</span></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#"><span class="btn btn-danger">VENDAS</span></a>
+                      <a class="nav-link" href="novaVenda.php"><span class="btn btn-danger">VENDA</span></a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="clientes.php"><span class="btn btn-warning">CLIENTES</span></a>

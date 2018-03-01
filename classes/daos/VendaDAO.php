@@ -1,7 +1,6 @@
-
 <?php
 require_once 'Model.php';
-clas VendaDAO extends Model{
+class VendaDAO extends Model{
 	function __construct(){
 		parent::__construct();
 		$this->class = 'Venda';
@@ -17,7 +16,7 @@ clas VendaDAO extends Model{
 			'{$venda->getCliente()->getId()}',
 			'{$venda->getEntregador()->getId()}'";
 		$this->inserir($valores);
-	},
+	}
 	public function alteraVenda(Venda $venda){
 		$valores = "
 			dataHora = '{$venda->getDataHora()}',

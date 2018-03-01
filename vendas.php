@@ -21,7 +21,7 @@ date_default_timezone_set("America/Sao_Paulo");
   <div class="col-lg-6">
             
             <div class="bs-component">
-              <form action="novaVenda.php" method = "GET">
+              <form action="novaVenda.php" method = "post">
                 <fieldset>
                   <div class="form-group">
                     <label class="col-form-label" for="numero">Telefone</label>

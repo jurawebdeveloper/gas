@@ -59,7 +59,7 @@ class Model{
 			$sql = $this->db->prepare("INSERT INTO {$this->table} VALUES ($values)");
 			//print_r($sql); exit;
 			$sql->execute();
-			//return $this->db->lastInsertId();
+			return $this->db->lastInsertId();
 		}
 		public function alterar($id, $value){
 			$sql = $this->db->prepare("UPDATE {$this->table} SET {$value} WHERE id = {$id}");

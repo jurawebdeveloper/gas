@@ -1,4 +1,3 @@
-
 <?php
 require_once 'Model.php';
 class CepDAO extends Model{
@@ -32,6 +31,13 @@ class CepDAO extends Model{
 		$termo = "logradouro like '%{$digitaRua}%'";
 		return $this->procurarTermo($termo);
 	}
+	public function procuraCep($cep){
+			$sql = $this->db->prepare("SELECT * FROM {$this->table} WHERE cep = {$cep}");
+			//print_r($sql); exit;
+			$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
+			$sql->execute();
+			return $sql->fetch();
+		}
 }
 
 
