@@ -2,12 +2,6 @@
 date_default_timezone_set("America/Sao_Paulo");
     require_once('autoload.php');
 
-?>
-
-
-
-<!--/*****************************************************************************/-->
-<?php 
   $venda = new Venda();
   $vendaDAO = new VendaDAO();
   $itemVenda = new ItemVenda();
@@ -32,5 +26,5 @@ date_default_timezone_set("America/Sao_Paulo");
 	$msg = 'concluída com sucesso!';
   	$class = 'success'; 
   
-    header("Location:vendas.php?msg=$msg&class=$class"); 
+    header("Location:index.php?msg=$msg&class=$class"); 
 ?>

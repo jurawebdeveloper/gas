@@ -21,7 +21,7 @@ class Model{
     	}
 
 		public function listar(){
-			$sql = $this->db->prepare("SELECT * FROM {$this->table}");
+			$sql = $this->db->prepare("SELECT * FROM {$this->table} ORDER BY id DESC");
 			//print_r($sql); exit;
 			$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
 			$sql->execute();

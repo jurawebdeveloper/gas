@@ -1,6 +1,9 @@
 <?php
 date_default_timezone_set("America/Sao_Paulo");
     require_once('layout/header.php');
+if (isset($_GET['msg'])) {
+      $msg = ($_GET['msg']);
+    } else{$msg = "";}
 ?>
 
 <?php 
@@ -12,14 +15,16 @@ date_default_timezone_set("America/Sao_Paulo");
   $cepDAO = new CepDAO();
   $venda = new Venda();
   $vendaDAO = new VendaDAO();
+  $produto = new Produto();
+  $produtoDAO = new ProdutoDAO();
 
-  $vendas = $vendaDAO->listar();
+  $vendas = $vendaDAO->listarVendasDia();
 //print_r($vendas); exit;
 ?>
 
 
   <div class="col-lg-6">
-            
+    <h4> Venda <?php echo $msg; ?> </h4>        
             <div class="bs-component">
               <form action="novaVenda.php" method="GET">
                 <fieldset>
@@ -45,11 +50,11 @@ date_default_timezone_set("America/Sao_Paulo");
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">hora venda</th>
-                    <th scope="col">cliente</th>
-                    <th scope="col">rua</th>
-                    <th scope="col">numero</th>
+                    <th scope="col">HORA VENDA</th>
+                    <th scope="col">CLIENTE</th>
+                    <th scope="col">RUA</th>
+                    <th scope="col">NÚMERO</th>
+                    <th scope="col">TELEFONE</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -58,20 +63,30 @@ date_default_timezone_set("America/Sao_Paulo");
                     $cliente = new Cliente();
                     $cliente = $clienteDAO->procurar($venda->cliente_id);
 
+                    $telefone = $telefoneDAO->procuraTelCli($cliente->getId());
+
 
                     $cepDAO = new CepDAO();
                     $cep = new Cep();
                     $cep = $cepDAO->procuraCep($cliente->getCep());
-                   
+
+                    /*$itemVendaDAO = new ItemVendaDAO();
+                    $itemVenda = new ItemVenda();
+                    $itemVenda = $itemVendaDAO->procurar($venda->getId());
+                    
+                    $produto = new Produto();
+                    $produtoDAO = new ProdutoDAO();
+                    $produto = $produtoDAO->procurar($cliente->getCep());
+                   */
                    //echo '<pre>'; 
                     //print_r($cliente); exit;
                    ?>
                  <tr class="table-info">
-                    <td> <?php echo $venda->getid(); ?> </td>
                     <td> <?php echo $venda->getDataHora(); ?> </td>
                     <td> <?php echo $cliente->getNome(); ?> </td>
                     <td> <?php echo $cep->getLogradouro(); ?> </td>
                     <td> <?php echo $cliente->getNumero(); ?> </td>
+                    <td> <?php echo $telefone->getNumero(); ?> </td>
                     <td>
                         
 

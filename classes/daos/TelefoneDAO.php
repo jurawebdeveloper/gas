@@ -9,12 +9,19 @@ class TelefoneDAO extends Model{
 	}
 
 	public function procuraTel($numero){
-			$sql = $this->db->prepare("SELECT * FROM {$this->table} WHERE numero = {$numero}");
-			$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
-			//print_r($sql); exit;
-			$sql->execute();
-			return $sql->fetch();
-		}
+		$sql = $this->db->prepare("SELECT * FROM {$this->table} WHERE numero = {$numero}");
+		$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
+		//print_r($sql); exit;
+		$sql->execute();
+		return $sql->fetch();
+	}
+	public function procuraTelCli($cliente_id){
+		$sql = $this->db->prepare("SELECT * FROM {$this->table} WHERE cliente_id = {$cliente_id} ORDER BY id DESC LIMIT 1");
+		$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
+		//print_r($sql); exit;
+		$sql->execute();
+		return $sql->fetch();
+	}
 	
 	public function insereTelefone(Telefone $telefone){
 		$valores = "

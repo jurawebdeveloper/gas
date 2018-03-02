@@ -26,13 +26,14 @@ date_default_timezone_set("America/Sao_Paulo");
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">Nome</th>
+                    <th scope="col">TELEFONE</th>
+                    <th scope="col">NOME</th>
                     <th scope="col">CPF</th>
-                    <th scope="col">Rua</th>
-                    <th scope="col">Número</th>
+                    <th scope="col">RUA</th>
+                    <th scope="col">NÚMERO</th>
                     <th scope="col">CEP</th>
-                    <th scope="col">Bairro</th>
-                    <th scope="col">Aniversário</th>
+                    <th scope="col">BAIRRO</th>
+                    <th scope="col">ANIVERSÁRIO</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -40,11 +41,13 @@ date_default_timezone_set("America/Sao_Paulo");
                     $cepDAO = new CepDAO();
                     $cep = new Cep();
                     $cep = $cepDAO->procuraCep($cliente->getCep());
+                    $telefone = $telefoneDAO->procuraTelCli($cliente->getId());
                    
                    //echo '<pre>'; 
                     //print_r($cliente); exit;
                    ?>
                  <tr class="table-info">
+                    <td> <?php echo $telefone->getNumero(); ?> </td>
                     <td> <?php echo $cliente->getNome(); ?> </td>
                     <td> <?php echo $cliente->getCpf(); ?> </td>
                     <td> <?php echo $cep->getLogradouro(); ?> </td>
