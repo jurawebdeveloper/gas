@@ -2,7 +2,8 @@
 date_default_timezone_set("America/Sao_Paulo");
     require_once('layout/header.php');
 
-//print_r($_POST['telefone']); exit;
+    $dataHora = date('Y-m-d H:i');
+
     $itemEstoque = new ItemEstoque();
     $itemEstoqueDAO = new ItemEstoqueDAO();
     $itens = $itemEstoqueDAO->listar();
@@ -22,7 +23,7 @@ date_default_timezone_set("America/Sao_Paulo");
       $telefone->setNumero($_GET['telefone']);
       
       $telefone = $telefoneDAO->procuraTel($telefone->getNumero());
-      //print_r($telefone); exit;
+
       if ($telefone) {
         $cliente = $clienteDAO->procurar($telefone->getClienteId());
         $cep = $cepDAO->procuraCep($cliente->getCep());
@@ -33,6 +34,7 @@ date_default_timezone_set("America/Sao_Paulo");
     if (isset($_GET['msg'])) {
       $msg = ($_GET['msg']);
     } else{$msg = "";}
+      //print_r($cliente); exit;
 ?>
   
       <!-- Form 
@@ -98,8 +100,13 @@ date_default_timezone_set("America/Sao_Paulo");
             </div>
             <form class="bs-component" action="mantemVenda.php" method = "post">
               <div class="form-group">
-                <label class="col-form-label" for="id_produto">Produto</label>
-                <select class="form-control" name="id_produto" id="id_produto" required onchange="mudaValor(this)">
+                
+                <input value="<?php echo $cliente->getId(); ?>" type="hidden" class="form-control " id="cliente_id" name="cliente_id">
+                
+                <input value="<?php echo $dataHora ?>" type="hidden" class="form-control " id="dataHora" name="dataHora">
+                
+                <label class="col-form-label" for="itemEstoque">Produto</label>
+                <select class="form-control" name="itemEstoque" id="itemEstoque" required onchange="mudaValor(this)">
                   <option value="">Selecione</option>
                   <?php foreach ($itens as $itemEstoque) { 
                       $produtoDAO = new ProdutoDAO();
@@ -116,6 +123,17 @@ date_default_timezone_set("America/Sao_Paulo");
               <div class="form-group">
                 <label class="col-form-label" for="rua">Valor Cobrado</label>
                 <input value="" type="text" class="form-control " id="valorCobrado" name="valorCobrado"  placeholder="Selecione o produto">
+                
+                <label class="col-form-label" for="rua">Tipo Pagamento</label>
+                <select class="form-control" name="tipoPagamento" id="tipoPagamento" >
+                  <option value="">Selecione</option>
+                  <option value="1" >Dinheiro</option>
+                  <option value="2" >Débito</option>
+                  <option value="3" >Crédito</option>
+                  <option value="4" >Cheque</option>
+                  <option value="5" >Prazo</option>
+                    
+                </select>
               </div>
               <button type="submit" class="btn btn-primary">Fechar Venda</button>
             </form>
@@ -152,7 +170,7 @@ date_default_timezone_set("America/Sao_Paulo");
       } );
       function mudaValor(id)
       {
-        let valor = $('#id_produto').find(':selected').data('value');
+        let valor = $('#itemEstoque').find(':selected').data('value');
         $('#valorCobrado').val(valor);
       }
     </script>

@@ -1,9 +1,12 @@
 <?php
 date_default_timezone_set("America/Sao_Paulo");
     require_once('layout/header.php');
-?>
 
-<?php 
+    if (isset($_GET['msg'])) {
+      $msg = ($_GET['msg']);
+    } else{$msg = "";}
+
+
   $cliente = new Cliente();
   $clienteDAO = new ClienteDAO();
   $telefone = new Telefone();
@@ -19,13 +22,14 @@ date_default_timezone_set("America/Sao_Paulo");
 
 
   <div class="col-lg-6">
+    <h4> Venda <?php echo $msg; ?> </h4>
             
             <div class="bs-component">
-              <form action="novaVenda.php" method = "post">
+              <form action="novaVenda.php" method="GET">
                 <fieldset>
                   <div class="form-group">
                     <label class="col-form-label" for="numero">Telefone</label>
-                    <input type="text" class="form-control fone" id="telefone" name = "telefone"  placeholder="Aguardando nova chamada...">
+                    <input type="text" class="form-control fone" id="telefone" name="telefone"  placeholder="Aguardando nova chamada...">
                   </div>
                 </fieldset>
                 

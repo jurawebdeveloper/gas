@@ -11,16 +11,17 @@ class ItemVendaDAO extends Model{
 			null,
 			'{$itemVenda->getQuantidade()}',
 			'{$itemVenda->getValorCobradoUn()}',
-			'{$itemVenda->getItemEstoque()->getId()}',
-			'{$itemVenda->getVenda()->getId()}'";
+			'{$itemVenda->getItemEstoque()}',
+			'{$itemVenda->getVenda()}'";
+		//print_r($valores); exit;
 		$this->inserir($valores);
 	}
 	public function alteraItemVenda(ItemVenda $itemVenda){
 		$valores = "
 			quantidade = '{$itemVenda->getQuantidade()}',
 			valorCobradoUn = '{$itemVenda->getValorCobradoUn()}',
-			itemEstoque_id = '{$itemVenda->getItemEstoque()->getId()}',
-			venda_id = '{$itemVenda->getVenda()->getId()}'";
+			itemEstoque_id = '{$itemVenda->getItemEstoque()}',
+			venda_id = '{$itemVenda->getVenda()}'";
 		$this->alterar($itemVenda->getId(),$valores);
 	}
 

@@ -1,6 +1,12 @@
 <?php
 date_default_timezone_set("America/Sao_Paulo");
     require_once('autoload.php');
+
+$venda = new Venda();
+$vendaDAO = new VendaDAO();
+
+$contagemVendas = $vendaDAO->contagem();
+
 ?>
 
 
@@ -55,7 +61,7 @@ date_default_timezone_set("America/Sao_Paulo");
                   
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
-                    <span class="btn btn-dark">Total vendas de hoje: 28</span>
+                    <span class="btn btn-dark">Total vendas de hoje: <?php echo $contagemVendas['total']; ?></span>
                   </form>
                 </div>
               </nav>

@@ -26,6 +26,18 @@ class ItemEstoqueDAO extends Model{
 		$this->alterar($itemEstoque->getId(),$valores);
 	}
 
+	public function baixaItem($id, $quantidade) {
+        $sql = $this->db->prepare("UPDATE {$this->table} SET quantidade = quantidade - {$quantidade} WHERE id = {$id}");
+        //print_r($sql); exit;
+        $sql->execute();
+    }
+
+    public function voltaItem($id, $quantidade) {
+        $sql = $this->db->prepare("UPDATE {$this->table} SET quantidade = quantidade + {$quantidade} WHERE id = {$id}");
+        //print_r($sql); exit;
+        $sql->execute();
+    }
+
 
 
 }

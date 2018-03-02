@@ -10,12 +10,20 @@ class VendaDAO extends Model{
 		$valores = "
 			null,
 			'{$venda->getDataHora()}',
+			null,
+			'{$venda->getTipoPagamento()}',
+			null,
+			'{$venda->getCliente()}',
+			null";
+			
+		/*	'{$venda->getDataHora()}',
 			'{$venda->getHoraEntrega()}',
 			'{$venda->getTipoPagamento()}',
 			'{$venda->getDataPrevista()}',
 			'{$venda->getCliente()->getId()}',
-			'{$venda->getEntregador()->getId()}'";
-		$this->inserir($valores);
+			'{$venda->getEntregador()->getId()}'";*/
+		
+		return $this->inserir($valores);
 	}
 	public function alteraVenda(Venda $venda){
 		$valores = "
@@ -26,6 +34,11 @@ class VendaDAO extends Model{
 			cliente_id = '{$venda->getCliente()->getId()}',
 			entregador_id = '{$venda->getEntregador()->getId()}'";
 		$this->alterar($venda->getId(),$valores);
+	}
+	public function contagem(){
+		$sql = $this->db->prepare("SELECT COUNT(*) as total FROM {$this->table} WHERE DATE(dataHora) = CURDATE()");
+        $sql->execute();
+        return $sql->fetch();
 	}
 
 
