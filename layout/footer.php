@@ -1,16 +1,15 @@
 
       
 
-      <footer id="footer">
-        <div class="row">
-          <div class="col-lg-12">
-
-            <p> Powered by JS-Tecnologia - 2018 </p>
-
-          </div>
-        </div>
-
-      </footer>
+      <footer class="main-footer" style="padding-top: 20px; margin-top: 40px;  background-color: black;">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-12">
+                  <p style="color: white; text-align: center; font-family: sans-serif;">Sistema de Gerenciamento de Entrega de Gás - SiGAS  - 2018 - Powered by JS-Tecnologia - (61) 999455 152 - Brasília - DF</p>
+                </div>
+              </div>
+            </div>
+          </footer>
     </div>
     
     <script src="js/jquery.min.js"></script>

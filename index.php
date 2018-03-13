@@ -48,16 +48,17 @@ if (isset($_GET['msg'])) {
 
             <div class="bs-component">
               <table class="table table-hover">
-                <thead>
+                <thead style="text-align: center; background-color: white;">
                   <tr>
                     <th scope="col">HORA VENDA</th>
                     <th scope="col">CLIENTE</th>
                     <th scope="col">RUA</th>
                     <th scope="col">NÚMERO</th>
                     <th scope="col">TELEFONE</th>
+                    <th scope="col">CONTROLE</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody style="text-align: center; ">
                   <?php foreach ($vendas as $venda) {
                     $clienteDAO = new ClienteDAO();
                     $cliente = new Cliente();
@@ -88,9 +89,13 @@ if (isset($_GET['msg'])) {
                     <td> <?php echo $cliente->getNumero(); ?> </td>
                     <td> <?php echo $telefone->getNumero(); ?> </td>
                     <td>
-                        
-
-                        <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="top"   title="Editar">Entrega</a>
+                       <a href="#" class="btn btn-light" data-toggle="tooltip" data-placement="top"   title="Entregar">E</a>
+                        <a href="novaVenda.php?acao=Editar&idVenda=<?php echo $venda->getId(); ?>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Alterar">A
+                          <i class="fa fa-pencil" aria-hidden="true" ></i>
+                        </a>
+                        <a href="#" class="btn btn-danger delecao"  onclick="return excluir('mantemVenda.php?id=<?php echo $venda->getId(); ?>&acao=Deletar')"  data-toggle="tooltip" data-placement="top" title="Cancelar">
+                          <div data-icon="y" class="icon" >X</div>
+                        </a>
 
                         <!--<a href="#" class="btn btn-danger"  data-toggle="tooltip" data-placement="top" title="Deletar">Exclui</a> -->
                     </td>

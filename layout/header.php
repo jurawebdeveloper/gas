@@ -29,7 +29,7 @@ $contagemVendas = $vendaDAO->contagem();
   </head>
   <body>
 
-    <div class="container" style="background-color: #B2EBF2;">
+    <div class="container" style="background-color: #e6e6e6;">
 
       <!-- Navbar
       ================================================== -->
@@ -39,7 +39,7 @@ $contagemVendas = $vendaDAO->contagem();
  
             <div class="bs-component">
               <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#"> <h4> Gerenciamento de Entrega de Gás </h4></a>
+                <a class="navbar-brand" href="#"><img src="img/gas_logo.png" width="200px"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -61,7 +61,8 @@ $contagemVendas = $vendaDAO->contagem();
                   
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
-                    <span class="btn btn-dark">Total vendas de hoje: <?php echo $contagemVendas['total']; ?></span>
+                    <span class="btn btn-dark"><h6> Total vendas de hoje: </h6></span>
+                    <span class="btn btn-dark"><h5><?php echo $contagemVendas['total']; ?></h5></span>
                   </form>
                 </div>
               </nav>

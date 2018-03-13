@@ -2,39 +2,29 @@
 date_default_timezone_set("America/Sao_Paulo");
     require_once('layout/header.php');
 
-    $dataHora = date('Y-m-d H:i');
 
-    $itemEstoque = new ItemEstoque();
-    $itemEstoqueDAO = new ItemEstoqueDAO();
-    $itens = $itemEstoqueDAO->listar();
     $cliente = new Cliente();
     $clienteDAO = new ClienteDAO();
     $telefone = new Telefone();
     $telefoneDAO = new TelefoneDAO();
     $cep = new Cep();
     $cepDAO = new CepDAO();
-    $venda = new Venda();
-    $vendaDAO = new VendaDAO();
-
-    $acao = 'cadastrar';
-    if (isset($_GET['telefone'])) {
-      
-      $telefone->setDdd('42');
-      $telefone->setNumero($_GET['telefone']);
-      
-      $telefone = $telefoneDAO->procuraTel($telefone->getNumero());
-
-      if ($telefone) {
-        $cliente = $clienteDAO->procurar($telefone->getClienteId());
-        $cep = $cepDAO->procuraCep($cliente->getCep());
-        $acao = 'alterar';
-      }else{}
-    }
     
+    // print_r($id); exit;
+    if (isset($_GET['id'])) {
+      $id = $_GET['id'];
+      $cliente = $clienteDAO->procurar($_GET['id']);
+      $telefone = $telefoneDAO->procuraTelCli($_GET['id']);
+      $cep = $cepDAO->procuraCep($cliente->getCep());
+      $acao = 'alterar';
+    }else{
+      $acao = 'cadastrar';
+    }
     if (isset($_GET['msg'])) {
       $msg = ($_GET['msg']);
     } else{$msg = "";}
-      //print_r($cliente); exit;
+    
+    
 ?>
   
       <!-- Form 
@@ -46,7 +36,7 @@ date_default_timezone_set("America/Sao_Paulo");
       ================================================== -->
           <div class="col-lg-6">
             <div class="page-header">
-              <h3 id="forms">Cliente <?php echo $msg; ?></h3>
+              <h3 id="forms">Cliente <?php if ($msg) {echo $msg;} ?></h3>
             </div>
             <div class="bs-component">
               <form action="mantemCliente.php?acao=<?php echo $acao; ?>" method = "post">
@@ -94,51 +84,7 @@ date_default_timezone_set("America/Sao_Paulo");
           <!-- Fim Form Cliente
       ================================================== -->
           
-          <div class="col-lg-4 offset-lg-1">
-            <div class="page-header">
-              <h3 id="forms">Venda</h3>
-            </div>
-            <form class="bs-component" action="mantemVenda.php" method = "post">
-              <div class="form-group">
-                
-                <input value="<?php echo $cliente->getId(); ?>" type="hidden" class="form-control " id="cliente_id" name="cliente_id">
-                
-                <input value="<?php echo $dataHora ?>" type="hidden" class="form-control " id="dataHora" name="dataHora">
-                
-                <label class="col-form-label" for="itemEstoque">Produto</label>
-                <select class="form-control" name="itemEstoque" id="itemEstoque" required onchange="mudaValor(this)">
-                  <option value="">Selecione</option>
-                  <?php foreach ($itens as $itemEstoque) { 
-                      $produtoDAO = new ProdutoDAO();
-                      $produto = $produtoDAO->procurar($itemEstoque->produto_id);
-                    ?>
-                  <option value="<?php echo $itemEstoque->getId(); ?>" data-value="<?php echo $itemEstoque->getValorVendaUn(); ?>"> <?php echo $produto->getDescricao(); echo " - "; echo $itemEstoque->getQuantidade(); echo " no estoque";?> </option>
-                    <?php } ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="col-form-label" for="rua">Quantidade</label>
-                <input value="1" type="number" class="form-control " id="quantidade" name="quantidade"  placeholder="Selecione..." onchange="return calcula_valor(this.value)">
-              </div>
-              <div class="form-group">
-                <label class="col-form-label" for="rua">Valor Cobrado</label>
-                <input value="" type="text" class="form-control " id="valorCobrado" name="valorCobrado"  placeholder="Selecione o produto">
-                <input value="" type="hidden" class="form-control " id="valorUnitario" name="valorUnitario"  placeholder="Selecione o produto">
-                
-                <label class="col-form-label" for="rua">Tipo Pagamento</label>
-                <select class="form-control" name="tipoPagamento" id="tipoPagamento" >
-                  <option value="">Selecione</option>
-                  <option value="1" >Dinheiro</option>
-                  <option value="2" >Débito</option>
-                  <option value="3" >Crédito</option>
-                  <option value="4" >Cheque</option>
-                  <option value="5" >Prazo</option>
-                    
-                </select>
-              </div>
-              <button type="submit" class="btn btn-primary">Fechar Venda</button>
-            </form>
-          </div>
+
         </div>
       </div>
 
@@ -169,17 +115,5 @@ date_default_timezone_set("America/Sao_Paulo");
           }
         });
       } );
-      function mudaValor(id)
-      {
-        let valor = $('#itemEstoque').find(':selected').data('value');
-        $('#valorCobrado').val(valor);
-        $('#valorUnitario').val(valor);
-        $('#quantidade').val(1);
-      }
-      function calcula_valor(qtd)
-      {
-        var v = $('#valorUnitario').val();
-        var nv = v * qtd;
-        $('#valorCobrado').val(nv);
-      }
+      
     </script>
