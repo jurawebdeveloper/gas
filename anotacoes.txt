@@ -1,0 +1,3 @@
+Anotar aqui observaões referentes ao desenvolvimento do projeto.
+Por exemplo: 
+07/02/2018 - criação deste arquivo de anotações e teste do GitHub
