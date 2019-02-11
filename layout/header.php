@@ -1,12 +1,13 @@
 <?php
 date_default_timezone_set("America/Sao_Paulo");
-    require_once('autoload.php');
+require_once('autoload.php');
 
 $venda = new Venda();
 $vendaDAO = new VendaDAO();
 
-$contagemVendas = $vendaDAO->contagem();
-
+$contagemVendasArray = $vendaDAO->contagem();
+$contagemVendas = $contagemVendasArray[0];
+//print_r($contagemVendas); exit;
 ?>
 
 
@@ -29,7 +30,7 @@ $contagemVendas = $vendaDAO->contagem();
   </head>
   <body>
 
-    <div class="container" style="background-color: #e6e6e6;">
+    <div class="container" style="background-color: #B2EBF2;">
 
       <!-- Navbar
       ================================================== -->
@@ -39,7 +40,7 @@ $contagemVendas = $vendaDAO->contagem();
  
             <div class="bs-component">
               <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#"><img src="img/gas_logo.png" width="200px"></a>
+                <a class="navbar-brand" href="#"> <h4> Gerenciamento de Entrega de Gás </h4></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -50,7 +51,7 @@ $contagemVendas = $vendaDAO->contagem();
                       <a class="nav-link" href="index.php"><span class=" btn btn-secondary">PRINCIPAL</span></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="novaVenda.php"><span class="btn btn-danger">VENDA</span></a>
+                      <a class="nav-link" href="novoEstoque.php"><span class="btn btn-danger">ESTOQUE</span></a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="clientes.php"><span class="btn btn-warning">CLIENTES</span></a>
@@ -61,8 +62,7 @@ $contagemVendas = $vendaDAO->contagem();
                   
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
-                    <span class="btn btn-dark"><h6> Total vendas de hoje: </h6></span>
-                    <span class="btn btn-dark"><h5><?php echo $contagemVendas['total']; ?></h5></span>
+                    <span class="btn btn-dark">Total vendas de hoje: <?php echo $contagemVendas; ?></span>
                   </form>
                 </div>
               </nav>

@@ -29,13 +29,6 @@ class ClienteDAO extends Model{
 			cep = '{$cliente->getCep()}'";
 		$this->alterar($cliente->getId(),$valores);
 	}
-	public function listaCliEndereco($cep, $numero){
-		$sql = $this->db->prepare("SELECT * FROM {$this->table} WHERE cep = $cep AND numero = $numero");
-			//print_r($sql); exit;
-		$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
-		$sql->execute();
-		return $sql->fetchAll();
-	}
 }
 
 

@@ -103,6 +103,4 @@ class Cep{
         return $this->uf;
     }
 }
-
-
 ?>

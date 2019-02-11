@@ -4,7 +4,7 @@ class ItemVendaDAO extends Model{
 	function __construct(){
 		parent::__construct();
 		$this->class = 'ItemVenda';
-		$this->table = 'itemVenda';
+		$this->table = 'itemvenda';
 	}
 	public function insereItemVenda(ItemVenda $itemVenda){
 		$valores = "

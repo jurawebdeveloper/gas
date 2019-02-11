@@ -5,23 +5,16 @@ class ItemEstoque{
 		private $quantidade;
 		private $valorCompraUn;
 		private $valorVendaUn;
-		private $produto;
+        private $produto;
+        private $nota;
 
 
 
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     *
-     * @return self
-     */
     public function setId($id)
     {
         $this->id = $id;
@@ -29,19 +22,11 @@ class ItemEstoque{
         
     }
 
-    /**
-     * @return mixed
-     */
     public function getDataEntrada()
     {
         return $this->dataEntrada;
     }
 
-    /**
-     * @param mixed $dataEntrada
-     *
-     * @return self
-     */
     public function setDataEntrada($dataEntrada)
     {
         $this->dataEntrada = $dataEntrada;
@@ -49,19 +34,11 @@ class ItemEstoque{
         
     }
 
-    /**
-     * @return mixed
-     */
     public function getQuantidade()
     {
         return $this->quantidade;
     }
 
-    /**
-     * @param mixed $quantidade
-     *
-     * @return self
-     */
     public function setQuantidade($quantidade)
     {
         $this->quantidade = $quantidade;
@@ -69,19 +46,11 @@ class ItemEstoque{
         
     }
 
-    /**
-     * @return mixed
-     */
-    public function getValorCompraUn()
+     public function getValorCompraUn()
     {
         return $this->valorCompraUn;
     }
 
-    /**
-     * @param mixed $valorCompraUn
-     *
-     * @return self
-     */
     public function setValorCompraUn($valorCompraUn)
     {
         $this->valorCompraUn = $valorCompraUn;
@@ -89,42 +58,38 @@ class ItemEstoque{
         
     }
 
-    /**
-     * @return mixed
-     */
-    public function getValorVendaUn()
+     public function getValorVendaUn()
     {
         return $this->valorVendaUn;
     }
 
-    /**
-     * @param mixed $valorVendaUn
-     *
-     * @return self
-     */
-    public function setValorVendaUn($valorVendaUn)
+     public function setValorVendaUn($valorVendaUn)
     {
         $this->valorVendaUn = $valorVendaUn;
 
         
     }
 
-    /**
-     * @return mixed
-     */
-    public function getProduto()
+     public function getProduto()
     {
         return $this->produto;
     }
 
-    /**
-     * @param mixed $produto
-     *
-     * @return self
-     */
-    public function setProduto($produto)
+     public function setProduto($produto)
     {
         $this->produto = $produto;
+
+        
+    }
+
+    public function getNota()
+    {
+        return $this->nota;
+    }
+
+     public function setNota($nota)
+    {
+        $this->nota = $nota;
 
         
     }

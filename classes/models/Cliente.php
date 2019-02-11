@@ -1,4 +1,3 @@
-
 <?php
 class Cliente{
 		private $id;
@@ -130,6 +129,4 @@ class Cliente{
         
     }
 }
-
-
 ?>

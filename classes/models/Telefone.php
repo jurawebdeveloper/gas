@@ -1,4 +1,3 @@
-
 <?php
 class Telefone{
 		private $id;
@@ -88,6 +87,4 @@ class Telefone{
         return $this->cliente_id;
     }
 }
-
-
 ?>

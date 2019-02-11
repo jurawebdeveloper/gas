@@ -36,7 +36,8 @@ class VendaDAO extends Model{
 		$this->alterar($venda->getId(),$valores);
 	}
 	public function contagem(){
-		$sql = $this->db->prepare("SELECT COUNT(*) as total FROM {$this->table} WHERE DATE(dataHora) = CURDATE()");
+		$sql = $this->db->prepare("SELECT SUM(quantidade) FROM `itemvenda` WHERE venda_id in(SELECT id FROM `venda` WHERE DATE(dataHora) = CURDATE())");
+//print_r($sql); exit;
         $sql->execute();
         return $sql->fetch();
 	}

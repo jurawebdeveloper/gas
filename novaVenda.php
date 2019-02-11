@@ -1,12 +1,13 @@
 <?php
 date_default_timezone_set("America/Sao_Paulo");
-    require_once('layout/header.php');
+require_once('layout/header.php');
 
     $dataHora = date('Y-m-d H:i');
 
     $itemEstoque = new ItemEstoque();
     $itemEstoqueDAO = new ItemEstoqueDAO();
-    $itens = $itemEstoqueDAO->listar();
+    $itens = $itemEstoqueDAO->listarItemEst();
+//print_r($itens); exit;
     $cliente = new Cliente();
     $clienteDAO = new ClienteDAO();
     $telefone = new Telefone();
@@ -18,9 +19,20 @@ date_default_timezone_set("America/Sao_Paulo");
 
     $acao = 'cadastrar';
     if (isset($_GET['telefone'])) {
-      
-      $telefone->setDdd('42');
-      $telefone->setNumero($_GET['telefone']);
+      if (isset($_GET['channel'])) {
+        if(substr($_GET['telefone'],0,1) == '0'){
+          $ddd = substr($_GET['telefone'],3,2);
+          $num = substr($_GET['telefone'],4);
+            } else {
+              $ddd = substr($_GET['telefone'],2,2);
+              $num = substr($_GET['telefone'],3);
+                    }
+      } else {
+          $ddd = '42';
+          $num = ($_GET['telefone']);
+          }
+      $telefone->setDdd($ddd);
+      $telefone->setNumero($num);
       
       $telefone = $telefoneDAO->procuraTel($telefone->getNumero());
 
@@ -53,7 +65,8 @@ date_default_timezone_set("America/Sao_Paulo");
                 <fieldset>
                   <div class="form-group">
                     <label class="col-form-label" for="numero">Telefone</label>
-                    <input value="<?php if ($telefone) {echo $telefone->getNumero();} else echo $_GET['telefone'] ?>" type="text" class="form-control fone" id="telefone" name = "telefone"  placeholder="Digite o telefone...">
+                    <input value="<?php if ($telefone) {echo $telefone->getNumero();} else echo $num ?>" type="text" class="form-control fone" id="telefone" name = "telefone"  placeholder="Digite o telefone...">
+                    <input value="<?php if ($telefone) {echo $telefone->getDdd();} else echo $ddd ?>" type="hidden" class="form-control fone" id="ddd" name = "ddd">
 
                     <input value="<?php if ($telefone) {echo $telefone->getId();}  ?>" type="hidden" class="form-control fone" id="telefone_id" name = "telefone_id">
 
@@ -118,12 +131,11 @@ date_default_timezone_set("America/Sao_Paulo");
               </div>
               <div class="form-group">
                 <label class="col-form-label" for="rua">Quantidade</label>
-                <input value="1" type="number" class="form-control " id="quantidade" name="quantidade"  placeholder="Selecione..." onchange="return calcula_valor(this.value)">
+                <input value = 1 type="number" class="form-control " id="quantidade" name="quantidade"  placeholder="Selecione...">
               </div>
               <div class="form-group">
                 <label class="col-form-label" for="rua">Valor Cobrado</label>
                 <input value="" type="text" class="form-control " id="valorCobrado" name="valorCobrado"  placeholder="Selecione o produto">
-                <input value="" type="hidden" class="form-control " id="valorUnitario" name="valorUnitario"  placeholder="Selecione o produto">
                 
                 <label class="col-form-label" for="rua">Tipo Pagamento</label>
                 <select class="form-control" name="tipoPagamento" id="tipoPagamento" >
@@ -173,13 +185,5 @@ date_default_timezone_set("America/Sao_Paulo");
       {
         let valor = $('#itemEstoque').find(':selected').data('value');
         $('#valorCobrado').val(valor);
-        $('#valorUnitario').val(valor);
-        $('#quantidade').val(1);
-      }
-      function calcula_valor(qtd)
-      {
-        var v = $('#valorUnitario').val();
-        var nv = v * qtd;
-        $('#valorCobrado').val(nv);
       }
     </script>
