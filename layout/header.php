@@ -57,7 +57,7 @@ $contagemVendas = $contagemVendasArray[0];
                       <a class="nav-link" href="clientes.php"><span class="btn btn-warning">CLIENTES</span></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#"><span class="btn btn-info">RELATÓRIOS</span></a>
+                      <a class="nav-link" href="rel_vendas.php"><span class="btn btn-info">RELATÓRIOS</span></a>
                     </li>
                   
                   </ul>

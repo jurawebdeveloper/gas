@@ -47,7 +47,7 @@ date_default_timezone_set("America/Sao_Paulo");
                     //print_r($cliente); exit;
                    ?>
                  <tr class="table-info">
-                    <td> <?php echo $telefone->getNumero(); ?> </td>
+                    <td> <?php echo 'telefone'; ?> </td>
                     <td> <?php echo $cliente->getNome(); ?> </td>
                     <td> <?php echo $cliente->getCpf(); ?> </td>
                     <td> <?php echo $cep->getLogradouro(); ?> </td>
