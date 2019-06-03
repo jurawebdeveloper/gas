@@ -50,13 +50,7 @@ class VendaDAO extends Model{
 		return $sql->fetchAll();
 	}
 
-	public function listarVendas(){
-		$sql = $this->db->prepare("SELECT * FROM {$this->table} WHERE DATE(dataHora) > '2001-01-01' ORDER BY id DESC");
-		//print_r($sql); exit;
-		$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
-		$sql->execute();
-		return $sql->fetchAll();
-	}
+	
 
 }
 ?>

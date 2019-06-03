@@ -36,8 +36,8 @@ class ItemVendaDAO extends Model{
 		
 
 		$sql = $this->db->prepare("
-			SELECT E.nome, C.descricao produto, A.quantidade, B.valorCompraUn, A.valorCobradoUn,
-			CAST(D.dataHora AS date) dt_venda, D.tipoPagamento
+			SELECT E.nome, C.id id_produto, A.quantidade, B.id id_item_estoque, A.valorCobradoUn,
+			D.id id_venda dt_venda, D.tipoPagamento
 			FROM itemvenda A
 			LEFT JOIN itemestoque B ON A.itemEstoque_id = B.id
 			LEFT JOIN produto C ON B.produto_id = C.id
