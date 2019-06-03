@@ -1,9 +1,6 @@
 <?php
 date_default_timezone_set("America/Sao_Paulo");
     require_once('layout/header.php');
-if (isset($_GET['msg'])) {
-      $msg = ($_GET['msg']);
-    } else{$msg = "";}
 ?>
 
 <?php 
@@ -17,11 +14,16 @@ if (isset($_GET['msg'])) {
   $vendaDAO = new VendaDAO();
   $produto = new Produto();
   $produtoDAO = new ProdutoDAO();
-  $itemVendaDAO = new itemVendaDAO();
-  $itemVenda = new itemVenda();
+  $ItemVendaDAO = new ItemVendaDAO();
+  $ItemVenda = new ItemVenda();
 
-  $vendas = $vendaDAO->listarVendas();
-//print_r($vendas); exit;
+  $vendas = $ItemVendaDAO->listarVendas();
+echo '<pre>';print_r($vendas); exit;
+
+	
+  if(isset($_POST['termo']) AND $_POST['termo'] != '' AND $_POST['termo2'] != '') {
+    $vendas = $ItemVendaDAO->listarVendas($_POST['termo'], $_POST['termo2']);
+  }
 ?>
 
 
@@ -30,6 +32,7 @@ if (isset($_GET['msg'])) {
           <div class="col-lg-12 col-sm-12">
             <div class="page-header">
               <h3 id="tables">Vendas deste mês</h3>
+              
               <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
                 <div class="col-md-12">
                   &nbsp;
