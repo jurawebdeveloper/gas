@@ -29,7 +29,30 @@ if (isset($_GET['msg'])) {
       
           <div class="col-lg-12 col-sm-12">
             <div class="page-header">
-              <h1 id="tables">Últimas Vendas</h1>
+              <h3 id="tables">Vendas deste mês</h3>
+              <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
+                <div class="col-md-12">
+                  &nbsp;
+                  <input type="date" class="form-control col-lg-4" style="float: left;" name="termo" value="<?php if(isset($_POST['termo']) AND $_POST['termo'] != '') { echo $_POST['termo']; } ?>" data-toggle="tooltip" data-placement="top" title="Data inicial" required />
+                  &nbsp;
+                  <input type="date" class="form-control col-lg-4" style="float: left;" name="termo2" value="<?php if(isset($_POST['termo2']) AND $_POST['termo2'] != '') { echo $_POST['termo2']; } ?>" data-toggle="tooltip" data-placement="top" title="Data final" />
+                  &nbsp;
+                  <button class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Selecione data início e fim">
+                    <i class="fa fa-search" aria-hidden="true">Filtrar</i>
+                  </button>
+                  &nbsp;
+                  <a href="atendimentos_excel.php?dt1=<?php echo $dt1; ?>&dt2=<?php echo $dt2; ?>" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Exportar para excel" target="_blank">
+                    <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                  </a>
+                  &nbsp;
+                  <a href="atendimentos_pdf.php?dt1=<?php echo $dt1; ?>&dt2=<?php echo $dt2; ?>" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Exportar para excel" target="_blank">
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                  </a>
+                  &nbsp;
+                
+                </div>
+
+							</form>
             </div>
 
             <div class="bs-component">
