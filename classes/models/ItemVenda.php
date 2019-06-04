@@ -6,62 +6,48 @@ class ItemVenda{
 		private $itemEstoque;
 		private $venda;
 
-    public function getId()
-    {
+    public function getId(){
         return $this->id;
     }
 
 
-    public function setId($id)
-    {
+    public function setId($id){
         $this->id = $id;
-
     }
 
-    public function getQuantidade()
-    {
+    public function getQuantidade(){
         return $this->quantidade;
     }
 
-    public function setQuantidade($quantidade)
-    {
+    public function setQuantidade($quantidade){
         $this->quantidade = $quantidade;
     }
 
-    public function getValorCobradoUn()
-    {
+    public function getValorCobradoUn(){
         return $this->valorCobradoUn;
     }
 
 
-    public function setValorCobradoUn($valorCobradoUn)
-    {
+    public function setValorCobradoUn($valorCobradoUn){
         $this->valorCobradoUn = $valorCobradoUn;
-      
     }
 
 
-    public function getItemEstoque()
-    {
+    public function getItemEstoque(){
         return $this->itemEstoque;
     }
 
-    public function setItemEstoque($itemEstoque)
-    {
+    public function setItemEstoque($itemEstoque){
         $this->itemEstoque = $itemEstoque;
-
     }
 
 
-    public function getVenda()
-    {
+    public function getVenda(){
         return $this->venda;
     }
 
-    public function setVenda($venda)
-    {
+    public function setVenda($venda){
         $this->venda = $venda;
-
     }
 }
 ?>

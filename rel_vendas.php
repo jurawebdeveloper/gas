@@ -8,11 +8,11 @@ date_default_timezone_set("America/Sao_Paulo");
   $ItemVendaDAO = new ItemVendaDAO();
   $ItemVenda = new ItemVenda();
 
-  $itens = $ItemVendaDAO->listar();
+  $itens = $ItemVendaDAO->listarVendasDatas();
 //echo '<pre>';print_r($vendas); exit;
 	
   if(isset($_POST['termo']) AND $_POST['termo'] != '' AND $_POST['termo2'] != '') {
-    $itens = $ItemVendaDAO->listar($_POST['termo'], $_POST['termo2']);
+    $itens = $ItemVendaDAO->listarVendasDatas($_POST['termo'], $_POST['termo2']);
   }
 ?>
 
@@ -63,17 +63,30 @@ date_default_timezone_set("America/Sao_Paulo");
         </thead>
         <tbody>
           <?php foreach ($itens as $item){ 
-           $VendaDAO = new VendaDAO();
+           
            $Venda = new Venda();
-           $clienteDAO = new ClienteDAO();
+           $VendaDAO = new VendaDAO();
+           $ItemEstoque = new ItemEstoque();
+           $ItemEstoqueDAO = new ItemEstoqueDAO();
+           $Produto = new Produto();
+           $ProdutoDAO = new ProdutoDAO();
            $cliente = new Cliente();
+           $clienteDAO = new ClienteDAO();
+           
            $venda = $VendaDAO->procurar($item->venda_id); 
-           $cliente = $clienteDAO->procurar($venda->cliente_id); 
-           //$cliente = $clienteDAO->procurar(21); 
+           $client = $clienteDAO->procurar($venda->cliente_id); 
+           $itemEst = $ItemEstoqueDAO->procurar($item->itemEstoque_id); 
+           $prod = $ProdutoDAO->procurar($itemEst->produto_id); 
+           
           ?>
           <tr class="table-info">
-            <td> <?php echo $cliente->getNome(); ?> </td>
-            
+            <td> <?php echo $client->getNome(); ?> </td>
+            <td> <?php echo $prod->getDescricao(); ?> </td>
+            <td> <?php echo $item->getQuantidade(); ?> </td>
+            <td> <?php echo $itemEst->getValorCompraUn(); ?> </td>
+            <td> <?php echo $item->getValorCobradoUn(); ?> </td>
+            <td> <?php echo substr($venda->getDataHora(),-20,10); ?> </td>
+            <td> <?php echo $venda->getTipoPagamento(); ?> </td>
 <!--private $id;
 		private $quantidade;
 		private $valorCobradoUn;

@@ -26,30 +26,25 @@ class ItemVendaDAO extends Model{
 	}
 
 
-	public function listarVendas($data_hj = '', $data_hj2 = '') {
-		if($data_hj == ''){
-			$data_hj = '2001-01-01';
+	public function listarVendasDatas($data_ini = '', $data_fim = '') {
+		if($data_ini == ''){
+			$data_ini = date('Y-m').'-01';
 		}
-		if($data_hj2 == ''){
-			$data_hj2 = date('Y-m-d');
+		if($data_fim == ''){
+			$data_fim = date('Y-m-d');
+			//print date('Y-m').'-01'; exit;
 		}
 		
 
 		$sql = $this->db->prepare("
-			SELECT E.nome, C.id id_produto, A.quantidade, B.id id_item_estoque, A.valorCobradoUn,
-			D.id id_venda dt_venda, D.tipoPagamento
-			FROM itemvenda A
-			LEFT JOIN itemestoque B ON A.itemEstoque_id = B.id
-			LEFT JOIN produto C ON B.produto_id = C.id
+			SELECT *FROM itemvenda A
 			LEFT JOIN venda D ON A.venda_id = D.id
-			LEFT JOIN cliente E ON D.cliente_id = E.id
-			WHERE D.dataHora >= '{$data_hj}' AND D.dataHora < '{$data_hj2}1'
-					");
+			WHERE D.dataHora >= '{$data_ini}' AND D.dataHora <= '{$data_fim}'");
 		//print_r($sql); exit;
 		$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
 		$sql->execute();
 		return $sql->fetchAll();
 	}
-
+//e
 }
 ?>
