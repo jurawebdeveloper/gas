@@ -9,11 +9,17 @@ date_default_timezone_set("America/Sao_Paulo");
   $ItemVenda = new ItemVenda();
 
   $itens = $ItemVendaDAO->listarVendasDatas();
-//echo '<pre>';print_r($vendas); exit;
+  $totais = $ItemVendaDAO->somaPorDatas();
+//echo '<pre>';print_r($totais); exit;
 	
   if(isset($_POST['termo']) AND $_POST['termo'] != '' AND $_POST['termo2'] != '') {
     $itens = $ItemVendaDAO->listarVendasDatas($_POST['termo'], $_POST['termo2']);
   }
+  if(isset($_POST['termo']) AND $_POST['termo'] != '' AND $_POST['termo2'] != '') {
+    $totais = $ItemVendaDAO->somaPorDatas($_POST['termo'], $_POST['termo2']);
+  }
+
+  $total_unidades = $totais[0];
 ?>
 
 
@@ -21,7 +27,7 @@ date_default_timezone_set("America/Sao_Paulo");
       
   <div class="col-lg-12 col-sm-12">
     <div class="page-header">
-      <h4 id="tables" >Vendas deste mês</h4>
+      <h4 id="tables" >Vendas do período - total: <?php echo $total_unidades;?> unidades</h4>
       <p>Para outros períodos selecione as datas início e fim abaixo:</p>
       
       <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">

@@ -46,6 +46,24 @@ class ItemVendaDAO extends Model{
 		$sql->execute();
 		return $sql->fetchAll();
 	}
-//e
+
+	public function somaPorDatas($data_ini = '', $data_fim = ''){
+		if($data_ini == ''){
+			$data_ini = date('Y-m').'-01';
+			//print $data_ini; exit;
+		}
+		if($data_fim == ''){
+			$data_fim = date('Y-m-d').' 23:59:59';
+			//print $data_fim; exit;
+		}
+
+
+		$sql = $this->db->prepare("SELECT SUM(quantidade) FROM itemvenda WHERE venda_id in(
+			                        SELECT id FROM venda WHERE dataHora >= '{$data_ini}' AND dataHora <= '{$data_fim}')");
+//print_r($sql); exit;
+		$sql->execute();
+	    return $sql->fetch();
+	}
+
 }
 ?>
