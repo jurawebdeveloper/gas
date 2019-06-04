@@ -29,12 +29,13 @@ class ItemVendaDAO extends Model{
 	public function listarVendasDatas($data_ini = '', $data_fim = '') {
 		if($data_ini == ''){
 			$data_ini = date('Y-m').'-01';
+			//print $data_ini; exit;
 		}
 		if($data_fim == ''){
-			$data_fim = date('Y-m-d');
-			//print date('Y-m').'-01'; exit;
+			$data_fim = date('Y-m-d').' 23:59:59';
+			//print $data_fim; exit;
 		}
-		
+
 
 		$sql = $this->db->prepare("
 			SELECT *FROM itemvenda A
