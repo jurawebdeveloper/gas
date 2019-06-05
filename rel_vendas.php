@@ -27,7 +27,7 @@ date_default_timezone_set("America/Sao_Paulo");
       
   <div class="col-lg-12 col-sm-12">
     <div class="page-header">
-      <h4 id="tables" >Vendas do período - total: <?php echo $total_unidades;?> unidades</h4>
+      <h4 id="tables" >Vendas do período</h4>
       <p>Para outros períodos selecione as datas início e fim abaixo:</p>
       
       <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
@@ -45,14 +45,32 @@ date_default_timezone_set("America/Sao_Paulo");
             <i class="fa fa-file-excel-o" aria-hidden="true"></i>
           </a>
           &nbsp;
-         
         
         </div>
 
       </form>
     </div>
-
+    
     <div class="bs-component">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">QUANTIDADE VENDIDA</th>
+          <th scope="col">TOTAL RECEITA</th>
+          <th scope="col">TOTAL CUSTO COMPRA</th>
+          <th scope="col">LUCRO BRUTO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-info">
+          <td> <?php echo $totais[0]; ?> </td>
+          <td> <?php echo str_replace(".", ",", $totais[1]); ?> </td>
+          <td> <?php echo str_replace(".", ",", $totais[2]); ?> </td>
+          <td> <?php echo str_replace(".", ",", $totais[3]); ?> </td>
+        </tr>
+      </tbody>
+    </table>
+
       <table class="table table-hover">
         <thead>
           <tr>
