@@ -57,6 +57,8 @@ date_default_timezone_set("America/Sao_Paulo");
         <thead>
           <tr>
             <th scope="col">CLIENTE</th>
+            <th scope="col">RUA</th>
+            <th scope="col">Nº</th>
             <th scope="col">PRODUTO</th>
             <th scope="col">QUANTIDADE</th>
             <th scope="col">VALOR COMPRA</th>
@@ -77,14 +79,25 @@ date_default_timezone_set("America/Sao_Paulo");
            $cliente = new Cliente();
            $clienteDAO = new ClienteDAO();
            
-           $venda = $VendaDAO->procurar($item->venda_id); 
-           $client = $clienteDAO->procurar($venda->cliente_id); 
+           
+           $venda = $VendaDAO->procurar($item->venda_id);
+           $clienteDAO = new ClienteDAO();
+                    $cliente = new Cliente();
+                    $cliente = $clienteDAO->procurar($venda->cliente_id);
+
+                    
+                    $cepDAO = new CepDAO();
+                    $cep = new Cep();
+                    $cep = $cepDAO->procuraCep($cliente->getCep()); 
+            
            $itemEst = $ItemEstoqueDAO->procurar($item->itemEstoque_id); 
            $prod = $ProdutoDAO->procurar($itemEst->produto_id); 
            
           ?>
           <tr class="table-info">
-            <td> <?php echo $client->getNome(); ?> </td>
+            <td> <?php echo $cliente->getNome(); ?> </td>
+            <td> <?php echo $cep->getLogradouro(); ?> </td>
+            <td> <?php echo $cliente->getNumero(); ?> </td>
             <td> <?php echo $prod->getDescricao(); ?> </td>
             <td> <?php echo $item->getQuantidade(); ?> </td>
             <td> <?php echo $itemEst->getValorCompraUn(); ?> </td>

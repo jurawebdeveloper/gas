@@ -32,7 +32,7 @@ class ItemVendaDAO extends Model{
 			//print $data_ini; exit;
 		}
 		if($data_fim == ''){
-			$data_fim = date('Y-m-d').' 23:59:59';
+			$data_fim = date('Y-m-d');
 			//print $data_fim; exit;
 		}
 
@@ -40,7 +40,7 @@ class ItemVendaDAO extends Model{
 		$sql = $this->db->prepare("
 			SELECT *FROM itemvenda A
 			LEFT JOIN venda D ON A.venda_id = D.id
-			WHERE D.dataHora >= '{$data_ini}' AND D.dataHora <= '{$data_fim}'");
+			WHERE CAST(D.dataHora AS date) >= '{$data_ini}' AND CAST(D.dataHora AS date) <= '{$data_fim}'");
 		//print_r($sql); exit;
 		$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
 		$sql->execute();
@@ -53,14 +53,14 @@ class ItemVendaDAO extends Model{
 			//print $data_ini; exit;
 		}
 		if($data_fim == ''){
-			$data_fim = date('Y-m-d').' 23:59:59';
+			$data_fim = date('Y-m-d');
 			//print $data_fim; exit;
 		}
 
 
 		$sql = $this->db->prepare("SELECT SUM(quantidade) FROM itemvenda WHERE venda_id in(
-			                        SELECT id FROM venda WHERE dataHora >= '{$data_ini}' AND dataHora <= '{$data_fim}')");
-//print_r($sql); exit;
+			                        SELECT id FROM venda WHERE CAST(dataHora AS date) >= '{$data_ini}' AND CAST(dataHora AS date) <= '{$data_fim}')");
+
 		$sql->execute();
 	    return $sql->fetch();
 	}
