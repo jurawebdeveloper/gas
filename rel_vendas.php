@@ -100,26 +100,11 @@ date_default_timezone_set("America/Sao_Paulo");
             <td> <?php echo $cliente->getNumero(); ?> </td>
             <td> <?php echo $prod->getDescricao(); ?> </td>
             <td> <?php echo $item->getQuantidade(); ?> </td>
-            <td> <?php echo $itemEst->getValorCompraUn(); ?> </td>
-            <td> <?php echo $item->getValorCobradoUn(); ?> </td>
+            <td> <?php echo str_replace(".", ",", $itemEst->getValorCompraUn()); ?> </td>
+            <td> <?php echo str_replace(".", ",", $item->getValorCobradoUn()); ?> </td>
             <td> <?php echo substr($venda->getDataHora(),-20,10); ?> </td>
             <td> <?php echo $venda->getTipoPagamento(); ?> </td>
-<!--private $id;
-		private $quantidade;
-		private $valorCobradoUn;
-		private $itemEstoque;
-		private $venda; 
-Venda{
-		private $id;
-		private $cliente;
-		private $dataHora;
-		private $horaEntrega;
-		private $entregador;
-		private $tipoPagamento;
-		private $dataPrevista;    
-    
-    
--->
+
           </tr>
           <?php } ?>
         </tbody>
