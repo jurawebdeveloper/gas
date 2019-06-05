@@ -58,9 +58,7 @@ class ItemVendaDAO extends Model{
 		}
 
 
-		$sql = $this->db->prepare("SELECT SUM(A.quantidade) quantidade, TRUNCATE(SUM(valorCobradoUn),2) totalReceita, TRUNCATE(SUM(valorCompraUn),2)totalCompra, TRUNCATE((SUM(valorCobradoUn) - SUM(valorCompraUn)),2) lucroBruto 
-								   FROM itemvenda A LEFT JOIN itemestoque B ON A.itemEstoque_id = b.id 
-		                           WHERE venda_id in(SELECT id FROM venda WHERE CAST(dataHora AS date) >= '{$data_ini}' AND CAST(dataHora AS date) <= '{$data_fim}')");
+		$sql = $this->db->prepare("SELECT SUM(A.quantidade) quantidade, TRUNCATE(SUM(valorCobradoUn),2) totalReceita, TRUNCATE(SUM(valorCompraUn),2)totalCompra, TRUNCATE((SUM(valorCobradoUn) - SUM(valorCompraUn)),2) lucroBruto FROM itemvenda A LEFT JOIN itemestoque B ON A.itemEstoque_id = B.id LEFT JOIN venda C ON A.venda_id = C.id WHERE CAST(C.dataHora AS date) >= '{$data_ini}' AND CAST(C.dataHora AS date) <= '{$data_fim}' ");
 
 		$sql->execute();
 	    return $sql->fetch();

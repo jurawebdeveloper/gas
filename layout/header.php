@@ -18,19 +18,15 @@ $contagemVendas = $contagemVendasArray[0];
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="css/bootstrap.css" media="screen">
-    <!-- <link rel="stylesheet" href="css/custom.min.css"> -->
+    
     
     <link rel="stylesheet" href="jquery_ui/jquery-ui.css">
-    <style>
-      .ui-autocomplete-loading {
-        background: white url("img/ui-anim_basic_16x16.gif") right center no-repeat;
-      }
-    </style>
+    
 
   </head>
-  <body>
+  <body style="background-color: grey">
 
-    <div class="container" style="background-color: #B2EBF2;">
+    <div class="container" style="background-color: #B2EBF2; width: 100%">
 
       <!-- Navbar
       ================================================== -->
