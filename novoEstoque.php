@@ -10,7 +10,7 @@ require_once('layout/header.php');
     $produtoDAO = new ProdutoDAO();
     $itens = $itemEstoqueDAO->listarItemEst();
     $produtos = $produtoDAO->listar();
-//print_r($produtos); exit;
+      //echo '<pre>'; print_r($itens); exit;
 if (isset($_GET['msg'])) {
   $msg = ($_GET['msg']);
 } else{$msg = "";}
@@ -62,7 +62,48 @@ if (isset($_GET['msg'])) {
               <button type="submit" class="btn btn-primary">Salvar Item</button>
             </form>
           </div>
-
+          
+          <div class="col-lg-4 offset-lg-1">
+                    <h3>Estoque</h3>
+                    
+                    
+                    <!--[id:ItemEstoque:private] => 6
+                    [dataEntrada:ItemEstoque:private] => 2019-06-02
+                    [quantidade:ItemEstoque:private] => 12
+                    [valorCompraUn:ItemEstoque:private] => 66
+                    [valorVendaUn:ItemEstoque:private] => 80
+                    [produto:ItemEstoque:private] => 
+                    [nota:ItemEstoque:private] => 
+                    [produto_id] => 1
+                    [nu_nota_fiscal] => 9994571
+                    -->
+                    <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">DATA</th>
+                    <th scope="col">QTDE</th>
+                    <th scope="col">VALOR UN</th>
+                    <th scope="col">PRODUTO</th>
+                    <th scope="col">NOTA</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($itens as $item) {
+                    $prod = $produtoDAO->procurar($item->produto_id);
+                    $nota = $item->nu_nota_fiscal;
+                    ?>
+                    <tr class="table-info">
+                      <td> <?php echo $item->getDataEntrada(); ?> </td>
+                      <td> <?php echo $item->getQuantidade(); ?> </td>
+                      <td> <?php echo $item->getvalorCompraUn(); ?> </td>
+                      <td> <?php echo $prod->getDescricao(); ?> </td>
+                      <td> <?php echo $nota; ?> </td>
+                  
+                    </tr>
+                  <?php } ?>
+                </tbody>
+                </table>
+          </div>
 
         </div>
       </div>
