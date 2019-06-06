@@ -19,7 +19,7 @@ if (isset($_GET['msg'])) {
   $produtoDAO = new ProdutoDAO();
 
   $vendas = $vendaDAO->listarVendasDia();
-//print_r($vendas); exit;
+//echo '<pre>';print_r($vendas); exit;
 ?>
 
 
@@ -50,7 +50,9 @@ if (isset($_GET['msg'])) {
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">HORA VENDA</th>
+                    <th scope="col">HORA</th>
+                    <th scope="col">QTDE</th>
+                    <th scope="col">PRODUTO</th>
                     <th scope="col">CLIENTE</th>
                     <th scope="col">RUA</th>
                     <th scope="col">NÚMERO</th>
@@ -69,20 +71,40 @@ if (isset($_GET['msg'])) {
                     $cepDAO = new CepDAO();
                     $cep = new Cep();
                     $cep = $cepDAO->procuraCep($cliente->getCep());
-
-                    /*$itemVendaDAO = new ItemVendaDAO();
-                    $itemVenda = new ItemVenda();
-                    $itemVenda = $itemVendaDAO->procurar($venda->getId());
                     
-                    $produto = new Produto();
+                    $venda_id = $venda->getId();
+                    $itemVendaDAO = new ItemVendaDAO();
+                    $itemVenda = new ItemVenda();
+                    $itemVenda = $itemVendaDAO->procurar($venda_id);
+                    
+                    $estoque_id = $itemVenda->getItemEstoque();
+                    $itemEstoqueDAO = new ItemVendaDAO();
+                    $itemEstoque = new ItemVenda();
+                    $itemEst = $itemVendaDAO->procurar($venda_id);
+
+                    $produto_id = $itemVenda->getProduto();
+                     $produto = new Produto();
                     $produtoDAO = new ProdutoDAO();
-                    $produto = $produtoDAO->procurar($cliente->getCep());
-                   */
-                   //echo '<pre>'; 
-                    //print_r($cliente); exit;
+                    $produto = $produtoDAO->procurar($produto_id);
+                   
+
+            /*[id:Venda:private] => 50
+            [cliente:Venda:private] => 
+            [dataHora:Venda:private] => 2019-06-06 09:37:00
+            [horaEntrega:Venda:private] => 
+            [entregador:Venda:private] => 
+            [tipoPagamento:Venda:private] => 1
+            [dataPrevista:Venda:private] => 
+            [dataPrevistaPg] => 
+            [cliente_id] => 21
+            [entregador_id] => 
+            */
+                   //echo '<pre>'; print_r($itemVenda); exit;
                    ?>
                  <tr class="table-info">
-                    <td> <?php echo $venda->getDataHora(); ?> </td>
+                    <td> <?php echo substr($venda->getDataHora(),10,6); ?> </td>
+                    <td> <?php echo $itemVenda->getQuantidade(); ?> </td>
+                    <td> <?php echo $produto->getDescricao(); ?> </td>
                     <td> <?php echo $cliente->getNome(); ?> </td>
                     <td> <?php echo $cep->getLogradouro(); ?> </td>
                     <td> <?php echo $cliente->getNumero(); ?> </td>
