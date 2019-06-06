@@ -65,18 +65,7 @@ if (isset($_GET['msg'])) {
           
           <div class="col-lg-4 offset-lg-1">
                     <h3>Estoque</h3>
-                    
-                    
-                    <!--[id:ItemEstoque:private] => 6
-                    [dataEntrada:ItemEstoque:private] => 2019-06-02
-                    [quantidade:ItemEstoque:private] => 12
-                    [valorCompraUn:ItemEstoque:private] => 66
-                    [valorVendaUn:ItemEstoque:private] => 80
-                    [produto:ItemEstoque:private] => 
-                    [nota:ItemEstoque:private] => 
-                    [produto_id] => 1
-                    [nu_nota_fiscal] => 9994571
-                    -->
+                
                     <table class="table table-hover">
                 <thead>
                   <tr>
