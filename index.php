@@ -79,8 +79,8 @@ if (isset($_GET['msg'])) {
                     $itemVenda = $itemVendaDAO->procurarItemPorVenda($venda->getId());
                     //$itemV = $itemVenda->fetch_all();
                     echo '<pre>'; print_r($itemVenda); exit;
-                    $itemEst_id = $itemVenda->getItemEstoque()->getId();
-                    echo '<pre>'; print_r($itemEst_id); exit;
+                    //$itemEst_id = $itemVenda->getItemEstoque()->getId();
+                    //echo '<pre>'; print_r($itemEst_id); exit;
                     $itemEstoqueDAO = new ItemEstoqueDAO();
                     $itemEstoque = new ItemEstoque();
                     $itemEst = $itemEstoqueDAO->procurar($itemEst_id);
