@@ -61,31 +61,34 @@ if (isset($_GET['msg'])) {
                 </thead>
                 <tbody>
                   <?php foreach ($vendas as $venda) {
+                    //echo '<pre>';print_r($venda); exit;
                     $clienteDAO = new ClienteDAO();
                     $cliente = new Cliente();
                     $cliente = $clienteDAO->procurar($venda->cliente_id);
-
+                    //print $cliente->getId(); exit;
                     $telefone = $telefoneDAO->procuraTelCli($cliente->getId());
-
+                    //echo '<pre'; print_r($telefone); exit;
 
                     $cepDAO = new CepDAO();
                     $cep = new Cep();
                     $cep = $cepDAO->procuraCep($cliente->getCep());
                     
-                    $venda_id = $venda->getId();
+                    
                     $itemVendaDAO = new ItemVendaDAO();
                     $itemVenda = new ItemVenda();
-                    $itemVenda = $itemVendaDAO->procurar($venda_id);
-                    
-                    $estoque_id = $itemVenda->getItemEstoque();
-                    $itemEstoqueDAO = new ItemVendaDAO();
-                    $itemEstoque = new ItemVenda();
-                    $itemEst = $itemVendaDAO->procurar($venda_id);
-
-                    $produto_id = $itemVenda->getProduto();
-                     $produto = new Produto();
+                    $itemVenda = $itemVendaDAO->procurarItemPorVenda($venda->getId());
+                    //$itemV = $itemVenda->fetch_all();
+                    echo '<pre>'; print_r($itemVenda); exit;
+                    $itemEst_id = $itemVenda->getItemEstoque()->getId();
+                    echo '<pre>'; print_r($itemEst_id); exit;
+                    $itemEstoqueDAO = new ItemEstoqueDAO();
+                    $itemEstoque = new ItemEstoque();
+                    $itemEst = $itemEstoqueDAO->procurar($itemEst_id);
+                    echo '<pre>'; print_r($itemEst); exit;
+                    $produto = $itemVenda->getProduto();
+                     //$produto = new Produto();
                     $produtoDAO = new ProdutoDAO();
-                    $produto = $produtoDAO->procurar($produto_id);
+                    $produto = $produtoDAO->procurar($produto->getId());
                    
 
             /*[id:Venda:private] => 50

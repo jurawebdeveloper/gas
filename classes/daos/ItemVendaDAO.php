@@ -25,6 +25,15 @@ class ItemVendaDAO extends Model{
 		$this->alterar($itemVenda->getId(),$valores);
 	}
 
+public function procurarItemPorVenda($venda_id) {
+		$sql = $this->db->prepare("
+			SELECT * FROM itemvenda
+			WHERE venda_id = '{$venda_id}'");
+		//print_r($sql); exit;//
+		$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
+		$sql->execute();
+		return $sql->fetchAll();
+	}
 
 	public function listarVendasDatas($data_ini = '', $data_fim = '') {
 		if($data_ini == ''){
