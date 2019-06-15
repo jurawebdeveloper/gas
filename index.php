@@ -61,11 +61,11 @@ if (isset($_GET['msg'])) {
                 </thead>
                 <tbody>
                   <?php foreach ($vendas as $venda) {
-                    //echo '<pre>';print_r($venda); exit;
+                    
                     $clienteDAO = new ClienteDAO();
                     $cliente = new Cliente();
                     $cliente = $clienteDAO->procurar($venda->cliente_id);
-                    //print $cliente->getId(); exit;
+                    
                     $telefone = $telefoneDAO->procuraTelCli($cliente->getId());
                     //echo '<pre'; print_r($telefone); exit;
 
@@ -77,10 +77,7 @@ if (isset($_GET['msg'])) {
                     $itemVendaDAO = new ItemVendaDAO();
                     $itemVenda = new ItemVenda();
                     $itemVenda = $itemVendaDAO->procurarItemPorVenda($venda->getId());
-                    //$itemV = $itemVenda->fetch_all();
-                    //echo '<pre>'; print_r($itemVenda[0]->getQuantidade()); exit;
-                    //$itemEst_id = $itemVenda[0]->getItemEstoque();
-                    //echo '<pre>'; print_r($itemEst_id); exit;
+                    
                     $itemEstoqueDAO = new ItemEstoqueDAO();
                     $itemEstoque = new ItemEstoque();
                     $itemEst = $itemEstoqueDAO->procurar($itemVenda[0]->itemEstoque_id);
@@ -89,20 +86,7 @@ if (isset($_GET['msg'])) {
                     $produto = new Produto();
                     $produtoDAO = new ProdutoDAO();
                     $produto = $produtoDAO->procurar($itemEst->produto_id);
-                   //echo '<pre>'; print_r($produto); exit;
-
-            /*[id:Venda:private] => 50
-            [cliente:Venda:private] => 
-            [dataHora:Venda:private] => 2019-06-06 09:37:00
-            [horaEntrega:Venda:private] => 
-            [entregador:Venda:private] => 
-            [tipoPagamento:Venda:private] => 1
-            [dataPrevista:Venda:private] => 
-            [dataPrevistaPg] => 
-            [cliente_id] => 21
-            [entregador_id] => 
-            */
-                   //echo '<pre>'; print_r($itemVenda); exit;
+                  
                    ?>
                  <tr class="table-info">
                     <td> <?php echo substr($venda->getDataHora(),10,6); ?> </td>
