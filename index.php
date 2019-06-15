@@ -78,18 +78,18 @@ if (isset($_GET['msg'])) {
                     $itemVenda = new ItemVenda();
                     $itemVenda = $itemVendaDAO->procurarItemPorVenda($venda->getId());
                     //$itemV = $itemVenda->fetch_all();
-                    echo '<pre>'; print_r($itemVenda); exit;
-                    //$itemEst_id = $itemVenda->getItemEstoque()->getId();
+                    //echo '<pre>'; print_r($itemVenda[0]->getQuantidade()); exit;
+                    //$itemEst_id = $itemVenda[0]->getItemEstoque();
                     //echo '<pre>'; print_r($itemEst_id); exit;
                     $itemEstoqueDAO = new ItemEstoqueDAO();
                     $itemEstoque = new ItemEstoque();
-                    $itemEst = $itemEstoqueDAO->procurar($itemEst_id);
-                    echo '<pre>'; print_r($itemEst); exit;
-                    $produto = $itemVenda->getProduto();
-                     //$produto = new Produto();
+                    $itemEst = $itemEstoqueDAO->procurar($itemVenda[0]->itemEstoque_id);
+                    
+                    $produtoId = $itemEst->produto_id;
+                    $produto = new Produto();
                     $produtoDAO = new ProdutoDAO();
-                    $produto = $produtoDAO->procurar($produto->getId());
-                   
+                    $produto = $produtoDAO->procurar($itemEst->produto_id);
+                   //echo '<pre>'; print_r($produto); exit;
 
             /*[id:Venda:private] => 50
             [cliente:Venda:private] => 
@@ -106,7 +106,7 @@ if (isset($_GET['msg'])) {
                    ?>
                  <tr class="table-info">
                     <td> <?php echo substr($venda->getDataHora(),10,6); ?> </td>
-                    <td> <?php echo $itemVenda->getQuantidade(); ?> </td>
+                    <td> <?php echo $itemVenda[0]->getQuantidade(); ?> </td>
                     <td> <?php echo $produto->getDescricao(); ?> </td>
                     <td> <?php echo $cliente->getNome(); ?> </td>
                     <td> <?php echo $cep->getLogradouro(); ?> </td>
