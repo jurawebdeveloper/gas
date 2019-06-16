@@ -65,15 +65,15 @@ require_once('layout/header.php');
             $botaoVenda = 'Alterar Venda';
             switch($tpPag){
                       case 1:
-                         $tpPag = 'Dinheiro'; break;
+                         $descPag = 'Dinheiro'; break;
                       case 2:
-                         $tpPag = 'Débito'; break;
+                         $descPag = 'Débito'; break;
                       case 3:
-                         $tpPag = 'Crédito'; break;
+                         $descPag = 'Crédito'; break;
                       case 4:
-                         $tpPag = 'Cheque'; break;
+                         $descPag = 'Cheque'; break;
                       default:
-                         $tpPag = 'Prazo';
+                         $descPag = 'Prazo';
                     }
             //echo'<pre>';print_r($produto); exit;
           }else{
@@ -85,7 +85,7 @@ require_once('layout/header.php');
           $venda->setId('');
             $venda->setDataHora($dataHora);
             $venda->setTipoPagamento('selecione');
-            $tpPag = 'selecione';
+            $descPag = 'selecione';
             $itemVenda->setQuantidade(1);
             $itemVenda->setValorCobradoUn('Valor');
             $botaoVenda = 'Fechar Venda';
@@ -97,7 +97,7 @@ require_once('layout/header.php');
         $venda->setId('');
         $venda->setDataHora($dataHora);
         $venda->setTipoPagamento('selecione');
-        $tpPag = 'selecione';
+        $descPag = 'selecione';
         //print_r($venda);exit;
         $itemVenda->setQuantidade(1);
         $itemVenda->setValorCobradoUn('Valor');
@@ -180,10 +180,14 @@ require_once('layout/header.php');
             <div class="page-header">
               <h3 id="forms">Venda</h3>
             </div>
-            <form class="bs-component" action="mantemVenda.php?acao2=<?php echo $acao2;?>" method = "post">
+            <form class="bs-component" action="mantemVenda.php?acao=<?php echo $acao2;?>&vendaId=<?php echo $venda->getId();?>" method = "post">
               <div class="form-group">
                 
                 <input value="<?php echo $cliente->getId(); ?>" type="hidden" class="form-control " id="cliente_id" name="cliente_id">
+                
+                <input value="<?php echo $venda->getId(); ?>" type="hidden" class="form-control " id="venda_id" name="venda_id">
+                
+                <input value="<?php echo $itemVenda->getId(); ?>" type="hidden" class="form-control " id="itemVenda_id" name="itemVenda_id">
                 
                 <input value="<?php echo $venda->getDataHora(); ?>" type="hidden" class="form-control " id="dataHora" name="dataHora">
                 
@@ -210,7 +214,7 @@ require_once('layout/header.php');
                 
                 <label class="col-form-label" for="rua">Tipo Pagamento</label>
                 <select class="form-control" name="tipoPagamento" id="tipoPagamento" >
-                  <option value=""><?php echo $tpPag;?></option>
+                  <option value="<?php echo $tpPag;?>"><?php echo $descPag;?></option>
                   <option value="1" >Dinheiro</option>
                   <option value="2" >Débito</option>
                   <option value="3" >Crédito</option>
