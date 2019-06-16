@@ -91,7 +91,7 @@ if (isset($_GET['msg'])) {
                     $tpPag = $venda->getTipoPagamento();
                     switch($tpPag){
                       case 1:
-                         $tpPag = 'Deinheiro'; break;
+                         $tpPag = 'Dinheiro'; break;
                       case 2:
                          $tpPag = 'Débito'; break;
                       case 3:
@@ -116,9 +116,9 @@ if (isset($_GET['msg'])) {
                     <td>
                         
 
-                        <a href="#" class="btn btn-warning"  data-toggle="tooltip" data-placement="top" title="Entregar">Entregar</a> 
+                        <a href="mantemVenda.php?acao=entregar&vendaId=<?php echo $venda->getId(); ?>" class="btn btn-warning"  data-toggle="tooltip" data-placement="top" title="Entregar">Entregar</a> 
 
-                        <a href="#" class="btn btn-danger"  data-toggle="tooltip" data-placement="top" title="Deletar">X</a> 
+                        <a href="mantemVenda.php?acao=deletar&vendaId=<?php echo $venda->getId(); ?>" class="btn btn-danger"  data-toggle="tooltip" data-placement="top" title="Deletar">X</a> 
                     </td>
 
                   </tr>

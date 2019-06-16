@@ -12,6 +12,34 @@ date_default_timezone_set("America/Sao_Paulo");
   $itemEstoque = new ItemEstoque();
   $itemEstoqueDAO = new ItemEstoqueDAO();
 
+  
+
+if ($_GET['vendaId']){
+  $venda = $vendaDAO->procurar($_GET['vendaId']);
+  $itemVenda = $itemVendaDAO->procurarItemPorVenda($venda->getId());
+  //echo '<pre>'; print_r($venda);exit;
+  if($_GET['acao']='deletar'){
+   $itemDel = $itemVendaDAO->deletar($itemVenda[0]->getId());
+   //echo '<pre>'; print_r($venda);exit;
+    $vendaDel = $vendaDAO->deletar($venda->getId());
+
+    $msg = 'excluída com sucesso!';
+    $class = 'success'; 
+  
+    header("Location:index.php?msg=$msg&class=$class");
+
+  }else if ($_GET['acao']='entregar'){
+    $dataHora = date('Y-m-d H:i');
+    $venda->set
+        $vendaEntrega = $vendaDAO->alterar($venda->getId());
+
+    $msg = 'entregue com sucesso!';
+    $class = 'success'; 
+  
+    header("Location:index.php?msg=$msg&class=$class");
+
+  }
+}else{
   $venda->setCliente($_POST['cliente_id']);
   $venda->setDataHora($_POST['dataHora']);
   $venda->setTipoPagamento($_POST['tipoPagamento']);
@@ -29,4 +57,5 @@ date_default_timezone_set("America/Sao_Paulo");
   	$class = 'success'; 
   
     header("Location:index.php?msg=$msg&class=$class");
+}
 ?>
