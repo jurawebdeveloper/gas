@@ -26,7 +26,7 @@ $contagemVendas = $contagemVendasArray[0];
   </head>
   <body style="background-color: grey">
 
-    <div class="container" style="background-color: #B2EBF2; width: 100%">
+    <div  style="background-color: #e6e6fa; width: 100%">
 
       <!-- Navbar
       ================================================== -->

@@ -9109,7 +9109,7 @@ table-success, table-info, table-warning, table-danger,
 }
 
 .table-info, .table-info > th, .table-info > td {
-  background-color: #17a2b8;
+  background-color: #778899;
 }
 
 .table-danger, .table-danger > th, .table-danger > td {

@@ -57,6 +57,7 @@ if (isset($_GET['msg'])) {
                     <th scope="col">RUA</th>
                     <th scope="col">NÚMERO</th>
                     <th scope="col">TELEFONE</th>
+                    <th scope="col">TP PGTO</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -86,23 +87,40 @@ if (isset($_GET['msg'])) {
                     $produto = new Produto();
                     $produtoDAO = new ProdutoDAO();
                     $produto = $produtoDAO->procurar($itemEst->produto_id);
-                  
+                
+                    $tpPag = $venda->getTipoPagamento();
+                    switch($tpPag){
+                      case 1:
+                         $tpPag = 'Deinheiro'; break;
+                      case 2:
+                         $tpPag = 'Débito'; break;
+                      case 3:
+                         $tpPag = 'Crédito'; break;
+                      case 4:
+                         $tpPag = 'Cheque'; break;
+                      default:
+                         $tpPag = 'Prazo';
+                    }
+
                    ?>
                  <tr class="table-info">
+                    
                     <td> <?php echo substr($venda->getDataHora(),10,6); ?> </td>
                     <td> <?php echo $itemVenda[0]->getQuantidade(); ?> </td>
                     <td> <?php echo $produto->getDescricao(); ?> </td>
                     <td> <?php echo $cliente->getNome(); ?> </td>
                     <td> <?php echo $cep->getLogradouro(); ?> </td>
                     <td> <?php echo $cliente->getNumero(); ?> </td>
-                    <td> <?php echo $telefone->getNumero(); ?> </td>
+                    <td> <a href="novaVenda.php?telefone=<?php echo $telefone->getNumero(); ?>" style="color: #FFF"><?php echo $telefone->getNumero(); ?></a></td>
+                    <td> <?php echo  $tpPag; ?> </td>
                     <td>
                         
 
-                        <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="top"   title="Editar">Entrega</a>
+                        <a href="#" class="btn btn-warning"  data-toggle="tooltip" data-placement="top" title="Entregar">Entregar</a> 
 
-                        <!--<a href="#" class="btn btn-danger"  data-toggle="tooltip" data-placement="top" title="Deletar">Exclui</a> -->
+                        <a href="#" class="btn btn-danger"  data-toggle="tooltip" data-placement="top" title="Deletar">X</a> 
                     </td>
+
                   </tr>
                   <?php } ?>
                </tbody>
