@@ -11,14 +11,16 @@ date_default_timezone_set("America/Sao_Paulo");
 
   $itemEstoque = new ItemEstoque();
   $itemEstoqueDAO = new ItemEstoqueDAO();
-
+  $cliente = new Cliente();
+  $clienteDAO = new ClienteDAO(); 
   
 
 if ($_GET['vendaId']){
   $venda = $vendaDAO->procurar($_GET['vendaId']);
   $itemVenda = $itemVendaDAO->procurarItemPorVenda($venda->getId());
   //echo '<pre>'; print_r($venda);exit;
-  if($_GET['acao']='deletar'){
+  
+  if($_GET['acao']=='deletar'){
    $itemDel = $itemVendaDAO->deletar($itemVenda[0]->getId());
    //echo '<pre>'; print_r($venda);exit;
     $vendaDel = $vendaDAO->deletar($venda->getId());
@@ -28,10 +30,12 @@ if ($_GET['vendaId']){
   
     header("Location:index.php?msg=$msg&class=$class");
 
-  }else if ($_GET['acao']='entregar'){
+  }else{
     $dataHora = date('Y-m-d H:i');
-    $venda->set
-        $vendaEntrega = $vendaDAO->alterar($venda->getId());
+    //$cliente = $clienteDAO->procurar($venda->getCliente());
+    $venda->setHoraEntrega($dataHora);
+    //echo '<pre>'; print_r($venda);exit;
+        $vendaEntrega = $vendaDAO->alteraVenda($venda);
 
     $msg = 'entregue com sucesso!';
     $class = 'success'; 

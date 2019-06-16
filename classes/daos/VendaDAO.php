@@ -30,9 +30,7 @@ class VendaDAO extends Model{
 			dataHora = '{$venda->getDataHora()}',
 			horaEntrega = '{$venda->getHoraEntrega()}',
 			tipoPagamento = '{$venda->getTipoPagamento()}',
-			dataPrevistaPg = '{$venda->getDataPrevista()}',
-			cliente_id = '{$venda->getCliente()->getId()}',
-			entregador_id = '{$venda->getEntregador()->getId()}'";
+			dataPrevistaPg = '{$venda->getDataPrevista()}'";
 		$this->alterar($venda->getId(),$valores);
 	}
 	public function contagem(){
@@ -43,7 +41,7 @@ class VendaDAO extends Model{
 	}
 
 	public function listarVendasDia(){
-		$sql = $this->db->prepare("SELECT * FROM {$this->table} WHERE DATE(dataHora) = CURDATE() ORDER BY id DESC");
+		$sql = $this->db->prepare("SELECT * FROM {$this->table} WHERE DATE(dataHora) = CURDATE() AND horaEntrega IS NULL ORDER BY id DESC");
 		//print_r($sql); exit;
 		$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
 		$sql->execute();
