@@ -112,7 +112,7 @@ if (isset($_GET['msg'])) {
                     <td> <?php echo $cep->getLogradouro(); ?> </td>
                     <td> <?php echo $cliente->getNumero(); ?> </td>
                     <td> <a href="novaVenda.php?telefone=<?php echo $telefone->getNumero(); ?>" style="color: #FFF"><?php echo $telefone->getNumero(); ?></a></td>
-                    <td> <?php echo  $tpPag; ?> </td>
+                    <td><a href="novaVenda.php?telefone=<?php echo $telefone->getNumero();?>&acao2=alteraVenda&vendaId=<?php echo $venda->getId();?>" style="color: #FFF"><?php echo  $tpPag; ?></a></td>
                     <td>
                         
 

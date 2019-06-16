@@ -7,6 +7,12 @@ require_once('layout/header.php');
     $itemEstoque = new ItemEstoque();
     $itemEstoqueDAO = new ItemEstoqueDAO();
     $itens = $itemEstoqueDAO->listarItemEst();
+    $itemVenda = new ItemVenda();
+    $itemVendaDAO = new ItemVendaDAO();
+    $produto = new Produto();
+    $produtoDAO = new ProdutoDAO();
+
+
 //print_r($itens); exit;
     $cliente = new Cliente();
     $clienteDAO = new ClienteDAO();
@@ -18,6 +24,8 @@ require_once('layout/header.php');
     $vendaDAO = new VendaDAO();
 
     $acao = 'cadastrar';
+    
+
     if (isset($_GET['telefone'])) {
       if (isset($_GET['channel'])) {
         if(substr($_GET['telefone'],0,1) == '0'){
@@ -40,13 +48,71 @@ require_once('layout/header.php');
         $cliente = $clienteDAO->procurar($telefone->getClienteId());
         $cep = $cepDAO->procuraCep($cliente->getCep());
         $acao = 'alterar';
-      }else{}
-    }
-    
+        //print $acao;exit;
+        if(isset($_GET['acao2'])){
+          //print 'acao';exit;
+          if($_GET['acao2']=='alteraVenda'){
+            
+            $acao2 = $_GET['acao2'];
+            $venda = $vendaDAO->procurar($_GET['vendaId']);
+            //echo'<pre>'; print $venda->getId(); exit;
+            $itemVenda = $itemVendaDAO->procurarItemPorVenda($venda->getId());
+            $itemVenda = $itemVenda[0];
+            //echo '<pre>'; print_r($itemVenda[0]); exit;
+            $itemEstoque = $itemEstoqueDAO->procurar($itemVenda->itemEstoque_id);
+            $produto = $produtoDAO->procurar($itemEstoque->produto_id);
+            $tpPag = $venda->getTipoPagamento();
+            $botaoVenda = 'Alterar Venda';
+            switch($tpPag){
+                      case 1:
+                         $tpPag = 'Dinheiro'; break;
+                      case 2:
+                         $tpPag = 'Débito'; break;
+                      case 3:
+                         $tpPag = 'Crédito'; break;
+                      case 4:
+                         $tpPag = 'Cheque'; break;
+                      default:
+                         $tpPag = 'Prazo';
+                    }
+            //echo'<pre>';print_r($produto); exit;
+          }else{
+            
+
+          }
+        } 
+        else{ //print 'teste5';exit;
+          $venda->setId('');
+            $venda->setDataHora($dataHora);
+            $venda->setTipoPagamento('selecione');
+            $tpPag = 'selecione';
+            $itemVenda->setQuantidade(1);
+            $itemVenda->setValorCobradoUn('Valor');
+            $botaoVenda = 'Fechar Venda';
+            $produto->setDescricao('Selecione');
+            //print_r($itemVenda);exit;
+        }
+      }//final if('telefone')
+      else{
+        $venda->setId('');
+        $venda->setDataHora($dataHora);
+        $venda->setTipoPagamento('selecione');
+        $tpPag = 'selecione';
+        //print_r($venda);exit;
+        $itemVenda->setQuantidade(1);
+        $itemVenda->setValorCobradoUn('Valor');
+        $botaoVenda = 'Fechar Venda';
+        $produto->setDescricao('Selecione');
+
+      }
+      //print 'teste3';exit;
+    }//final isset$_GET['telefone']
+   // print 'teste2';exit;
     if (isset($_GET['msg'])) {
       $msg = ($_GET['msg']);
     } else{$msg = "";}
       //print_r($cliente); exit;
+    //print 'teste1';exit;
 ?>
   
       <!-- Form 
@@ -58,7 +124,7 @@ require_once('layout/header.php');
       ================================================== -->
           <div class="col-lg-6">
             <div class="page-header">
-              <h3 id="forms">Cliente <?php echo $msg; ?></h3>
+              <h3 id="forms">Cliente <?php echo $msg; ?></h3> <!-- imprime mensagem -->
             </div>
             <div class="bs-component">
               <form action="mantemCliente.php?acao=<?php echo $acao; ?>" method = "post">
@@ -106,21 +172,24 @@ require_once('layout/header.php');
           </div>
           <!-- Fim Form Cliente
       ================================================== -->
-          
+         
+
+
+
           <div class="col-lg-4 offset-lg-1">
             <div class="page-header">
               <h3 id="forms">Venda</h3>
             </div>
-            <form class="bs-component" action="mantemVenda.php" method = "post">
+            <form class="bs-component" action="mantemVenda.php?acao2=<?php echo $acao2;?>" method = "post">
               <div class="form-group">
                 
                 <input value="<?php echo $cliente->getId(); ?>" type="hidden" class="form-control " id="cliente_id" name="cliente_id">
                 
-                <input value="<?php echo $dataHora ?>" type="hidden" class="form-control " id="dataHora" name="dataHora">
+                <input value="<?php echo $venda->getDataHora(); ?>" type="hidden" class="form-control " id="dataHora" name="dataHora">
                 
                 <label class="col-form-label" for="itemEstoque">Produto</label>
                 <select class="form-control" name="itemEstoque" id="itemEstoque" required onchange="mudaValor(this)">
-                  <option value="">Selecione</option>
+                  <option value="<?php echo $produto->getId();?>"><?php echo $produto->getDescricao();?></option>
                   <?php foreach ($itens as $itemEstoque) { 
                       $produtoDAO = new ProdutoDAO();
                       $produto = $produtoDAO->procurar($itemEstoque->produto_id);
@@ -128,18 +197,20 @@ require_once('layout/header.php');
                   <option value="<?php echo $itemEstoque->getId(); ?>" data-value="<?php echo $itemEstoque->getValorVendaUn(); ?>"> <?php echo $produto->getDescricao(); echo " - "; echo $itemEstoque->getQuantidade(); echo " no estoque";?> </option>
                     <?php } ?>
                 </select>
+              
+
               </div>
               <div class="form-group">
                 <label class="col-form-label" for="rua">Quantidade</label>
-                <input value = 1 type="number" class="form-control " id="quantidade" name="quantidade"  placeholder="Selecione...">
+                <input value = <?php echo $itemVenda->getQuantidade()?> type="number" class="form-control " id="quantidade" name="quantidade"  placeholder="Selecione...">
               </div>
               <div class="form-group">
                 <label class="col-form-label" for="rua">Valor Cobrado</label>
-                <input value="" type="text" class="form-control " id="valorCobrado" name="valorCobrado"  placeholder="Selecione o produto">
+                <input value="<?php echo $itemVenda->getValorCobradoUn()?>" type="text" class="form-control " id="valorCobrado" name="valorCobrado"  placeholder="Valor">
                 
                 <label class="col-form-label" for="rua">Tipo Pagamento</label>
                 <select class="form-control" name="tipoPagamento" id="tipoPagamento" >
-                  <option value="">Selecione</option>
+                  <option value=""><?php echo $tpPag;?></option>
                   <option value="1" >Dinheiro</option>
                   <option value="2" >Débito</option>
                   <option value="3" >Crédito</option>
@@ -148,7 +219,7 @@ require_once('layout/header.php');
                     
                 </select>
               </div>
-              <button type="submit" class="btn btn-primary">Fechar Venda</button>
+              <button type="submit" class="btn btn-primary"><?php echo $botaoVenda;?></button>
             </form>
           </div>
         </div>
