@@ -20,7 +20,7 @@ class ItemVendaDAO extends Model{
 		$valores = "
 			quantidade = '{$itemVenda->getQuantidade()}',
 			valorCobradoUn = '{$itemVenda->getValorCobradoUn()}',
-			itemEstoque_id = '{$itemVenda->getItemEstoque()}',
+			
 			venda_id = '{$itemVenda->getVenda()}'";
 		$this->alterar($itemVenda->getId(),$valores);
 	}
@@ -49,7 +49,7 @@ public function procurarItemPorVenda($venda_id) {
 		$sql = $this->db->prepare("
 			SELECT *FROM itemvenda A
 			LEFT JOIN venda D ON A.venda_id = D.id
-			WHERE CAST(D.dataHora AS date) >= '{$data_ini}' AND CAST(D.dataHora AS date) <= '{$data_fim}'");
+			WHERE CAST(D.dataHora AS date) >= '{$data_ini}' AND CAST(D.dataHora AS date) <= '{$data_fim}' ORDER BY D.dataHora DESC");
 		//print_r($sql); exit;
 		$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
 		$sql->execute();
