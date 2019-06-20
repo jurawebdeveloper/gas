@@ -73,5 +73,18 @@ public function procurarItemPorVenda($venda_id) {
 	    return $sql->fetch();
 	}
 
+
+	public function listarVendasEndereco($cep,$numero) {
+		$sql = $this->db->prepare("
+			SELECT *FROM itemvenda A
+			LEFT JOIN venda D ON A.venda_id = D.id
+			LEFT JOIN cliente C ON D.cliente_id = C.id
+			WHERE C.cep = '{$cep}' AND C.numero = '{$numero}' ORDER BY D.dataHora DESC");
+		//print_r($sql); exit;
+		$sql->setFetchMode(PDO::FETCH_CLASS, $this->class);
+		$sql->execute();
+		return $sql->fetchAll();
+	}
+
 }
 ?>
