@@ -29,7 +29,7 @@ date_default_timezone_set("America/Sao_Paulo");
 
           <!-- Form Cliente
       ================================================== -->
-          <div class="col-lg-6">
+          <div class="col-lg-5">
             <div class="page-header">
               <h4 id="forms">Pesquisar por endereço</h4> <!-- imprime mensagem -->
             </div>
@@ -65,9 +65,10 @@ date_default_timezone_set("America/Sao_Paulo");
 
 
 
-          <div class="col-lg-5 offset-lg-1">
+          <div class="col-lg-6 offset-lg-1">
             <div class="page-header">
               <h4 id="forms">Pesquisar por datas</h4>
+              <p>Por padrão exibe as vendas do mês atual. Pode selecionar outras datas abaixo:</p>
             </div>
             <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
               <div class="col-md-12">
@@ -126,12 +127,13 @@ date_default_timezone_set("America/Sao_Paulo");
             <th scope="col">CLIENTE</th>
             <th scope="col">RUA</th>
             <th scope="col">Nº</th>
-            <th scope="col">PRODUTO</th>
-            <th scope="col">QUANTIDADE</th>
-            <th scope="col">VALOR COMPRA</th>
-            <th scope="col">VALOR VENDA</th>
+            <th scope="col">BAIRRO</th>
+            <th scope="col">PROD</th>
+            <th scope="col">QTDE</th>
+            <th scope="col">VLR COMPRA</th>
+            <th scope="col">VLR VENDA</th>
             <th scope="col">DATA</th>
-            <th scope="col">TP PAGAMENTO</th>
+            <th scope="col">TP PGTO</th>
           </tr>
         </thead>
         <tbody>
@@ -165,6 +167,7 @@ date_default_timezone_set("America/Sao_Paulo");
             <td> <?php echo $cliente->getNome(); ?> </td>
             <td> <?php echo $cep->getLogradouro(); ?> </td>
             <td> <?php echo $cliente->getNumero(); ?> </td>
+            <td> <?php echo $cep->getBairro(); ?> </td>
             <td> <?php echo $prod->getDescricao(); ?> </td>
             <td> <?php echo $item->getQuantidade(); ?> </td>
             <td> <?php echo str_replace(".", ",", $itemEst->getValorCompraUn()); ?> </td>

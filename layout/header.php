@@ -58,7 +58,7 @@ $contagemVendas = $contagemVendasArray[0];
                   
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
-                    <span class="btn btn-dark">Total vendas de hoje: <?php echo $contagemVendas; ?></span>
+                    <span class="btn btn-dark">Vendas hoje: <?php echo '<h4 style = "color: yellow;">'.$contagemVendas.'<h4>'; ?></span>
                   </form>
                 </div>
               </nav>

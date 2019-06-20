@@ -52,12 +52,14 @@ if (isset($_GET['msg'])) {
                   <tr>
                     <th scope="col">HORA</th>
                     <th scope="col">QTDE</th>
-                    <th scope="col">PRODUTO</th>
+                    <th scope="col">PROD</th>
                     <th scope="col">CLIENTE</th>
                     <th scope="col">RUA</th>
                     <th scope="col">NÚMERO</th>
-                    <th scope="col">TELEFONE</th>
+                    <th scope="col">BAIRRO</th>
+                    <th scope="col">TEL</th>
                     <th scope="col">TP PGTO</th>
+                    <th scope="col">ENTREGA/CANCELA</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -111,6 +113,7 @@ if (isset($_GET['msg'])) {
                     <td> <?php echo $cliente->getNome(); ?> </td>
                     <td> <?php echo $cep->getLogradouro(); ?> </td>
                     <td> <?php echo $cliente->getNumero(); ?> </td>
+                    <td> <?php echo $cep->getBairro(); ?> </td>
                     <td> <a href="novaVenda.php?telefone=<?php echo $telefone->getNumero(); ?>" style="color: #FFF"><?php echo $telefone->getNumero(); ?></a></td>
                     <td><a href="novaVenda.php?telefone=<?php echo $telefone->getNumero();?>&acao2=alteraVenda&vendaId=<?php echo $venda->getId();?>" style="color: #FFF"><?php echo  $tpPag; ?></a></td>
                     <td>
