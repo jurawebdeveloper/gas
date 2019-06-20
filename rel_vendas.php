@@ -26,50 +26,76 @@ date_default_timezone_set("America/Sao_Paulo");
 
       
   <div class="col-lg-12 col-sm-12">
-    <div class="page-header">
+    
       <h4 id="tables" >Vendas do período</h4>
       <p>Para outros períodos selecione as datas início e fim abaixo:</p>
       
-      <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
-        <div class="col-md-12">
-          &nbsp;
-          <input type="date" class="form-control col-lg-4" style="float: left;" name="termo" value="<?php if(isset($_POST['termo']) AND $_POST['termo'] != '') { echo $_POST['termo']; } ?>" data-toggle="tooltip" data-placement="top" title="Data inicial" required />
-          &nbsp;
-          <input type="date" class="form-control col-lg-4" style="float: left;" name="termo2" value="<?php if(isset($_POST['termo2']) AND $_POST['termo2'] != '') { echo $_POST['termo2']; } ?>" data-toggle="tooltip" data-placement="top" title="Data final" />
-          &nbsp;
-          <button class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Selecione data início e fim">
-            <i class="fa fa-search" aria-hidden="true">Filtrar</i>
-          </button>
-          &nbsp;
-          <a href="#" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Exportar para excel" target="_blank">
-            <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-          </a>
-          &nbsp;
-        
-        </div>
 
-      </form>
-    </div>
+      <div class="col-lg-6">
+        <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
+          <div class="col-md-12">
+            &nbsp;
+            <input type="date" class="form-control col-lg-4" style="float: left;" name="termo" value="<?php if(isset($_POST['termo']) AND $_POST['termo'] != '') { echo $_POST['termo']; } ?>" data-toggle="tooltip" data-placement="top" title="Data inicial" required />
+            &nbsp;
+            <input type="date" class="form-control col-lg-4" style="float: left;" name="termo2" value="<?php if(isset($_POST['termo2']) AND $_POST['termo2'] != '') { echo $_POST['termo2']; } ?>" data-toggle="tooltip" data-placement="top" title="Data final" />
+            &nbsp;
+            <button class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Selecione data início e fim">
+              <i class="fa fa-search" aria-hidden="true">Filtrar</i>
+            </button>
+            &nbsp;
+            <a href="#" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Exportar para excel" target="_blank">
+              <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+            </a>
+            &nbsp;
+          
+          </div>
+
+        </form>
+
+        <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">QUANTIDADE VENDIDA</th>
+            <th scope="col">TOTAL RECEITA</th>
+            <th scope="col">TOTAL CUSTO COMPRA</th>
+            <th scope="col">LUCRO BRUTO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-info">
+            <td> <?php echo $totais[0]; ?> </td>
+            <td> <?php echo str_replace(".", ",", $totais[1]); ?> </td>
+            <td> <?php echo str_replace(".", ",", $totais[2]); ?> </td>
+            <td> <?php echo str_replace(".", ",", $totais[3]); ?> </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      </div>
+
+      <div class="col-lg-5">
+        <form action="novaVenda.php" method="GET">
+          <fieldset>
+            <div class="form-group">
+              <label class="col-form-label" for="numero">Telefone</label>
+              <input type="text" class="form-control fone" id="telefone" name="telefone"  placeholder="Aguardando nova chamada...">
+            </div>
+          </fieldset>
+          
+           
+        </form>
+      </div>
+
+
+      
+
     
+    
+
+
     <div class="bs-component">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">QUANTIDADE VENDIDA</th>
-          <th scope="col">TOTAL RECEITA</th>
-          <th scope="col">TOTAL CUSTO COMPRA</th>
-          <th scope="col">LUCRO BRUTO</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table-info">
-          <td> <?php echo $totais[0]; ?> </td>
-          <td> <?php echo str_replace(".", ",", $totais[1]); ?> </td>
-          <td> <?php echo str_replace(".", ",", $totais[2]); ?> </td>
-          <td> <?php echo str_replace(".", ",", $totais[3]); ?> </td>
-        </tr>
-      </tbody>
-    </table>
+    
 
       <table class="table table-hover">
         <thead>
